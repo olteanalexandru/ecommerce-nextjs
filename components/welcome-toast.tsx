@@ -5,26 +5,25 @@ import { toast } from 'sonner';
 
 export function WelcomeToast() {
   useEffect(() => {
-    // ignore if screen height is too small
     if (window.innerHeight < 650) return;
     if (!document.cookie.includes('welcome-toast=2')) {
-      toast('🛍️ Welcome to Next.js Commerce!', {
+      toast('✨ Welcome to Our Modern Shop', {
         id: 'welcome-toast',
-        duration: Infinity,
+        duration: 8000,
         onDismiss: () => {
           document.cookie = 'welcome-toast=2; max-age=31536000; path=/';
         },
+        className: 'animate-fade-in',
         description: (
           <>
-            This is a high-performance, SSR storefront powered by Shopify, Next.js, and Vercel.{' '}
+            Discover our curated collection of premium products with lightning-fast checkout.{' '}
             <a
               href="https://vercel.com/templates/next.js/nextjs-commerce"
-              className="text-blue-600 hover:underline"
+              className="text-blue-500 hover:text-blue-600 transition-colors font-medium hover:underline"
               target="_blank"
             >
-              Deploy your own
+              Learn more
             </a>
-            .
           </>
         )
       });

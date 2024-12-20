@@ -10,6 +10,9 @@ type Combination = {
   [key: string]: string | boolean;
 };
 
+const isColorOption = (name: string) => name.toLowerCase() === 'color';
+const isSizeOption = (name: string) => name.toLowerCase() === 'size';
+
 export function VariantSelector({
   options,
   variants
@@ -38,7 +41,18 @@ export function VariantSelector({
   return options.map((option) => (
     <form key={option.id}>
       <dl className="mb-8">
-        <dt className="mb-4 text-sm uppercase tracking-wide">{option.name}</dt>
+        <dt className="mb-4 flex items-center justify-between">
+          <span className="text-sm uppercase tracking-wide">{option.name}</span>
+          {isSizeOption(option.name) && (
+            <button
+              type="button"
+              className="text-xs text-blue-600 hover:text-blue-800 dark:text-blue-400"
+              onClick={() => window.open('/size-guide', '_blank')}
+            >
+              Size Guide
+            </button>
+          )}
+        </dt>
         <dd className="flex flex-wrap gap-3">
           {option.values.map((value) => {
             const optionNameLowerCase = option.name.toLowerCase();
@@ -72,17 +86,19 @@ export function VariantSelector({
                 disabled={!isAvailableForSale}
                 title={`${option.name} ${value}${!isAvailableForSale ? ' (Out of Stock)' : ''}`}
                 className={clsx(
-                  'flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900',
+                  'flex min-w-[48px] items-center justify-center rounded-full px-2 py-1 text-sm',
                   {
+                    'border bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900': !isColorOption(option.name),
+                    'h-8 w-8 min-w-0 rounded-full border-2': isColorOption(option.name),
                     'cursor-default ring-2 ring-blue-600': isActive,
                     'ring-1 ring-transparent transition duration-300 ease-in-out hover:ring-blue-600':
                       !isActive && isAvailableForSale,
-                    'relative z-10 cursor-not-allowed overflow-hidden bg-neutral-100 text-neutral-500 ring-1 ring-neutral-300 before:absolute before:inset-x-0 before:-z-10 before:h-px before:-rotate-45 before:bg-neutral-300 before:transition-transform dark:bg-neutral-900 dark:text-neutral-400 dark:ring-neutral-700 before:dark:bg-neutral-700':
-                      !isAvailableForSale
+                    'relative z-10 cursor-not-allowed': !isAvailableForSale
                   }
                 )}
+                style={isColorOption(option.name) ? { backgroundColor: value.toLowerCase() } : undefined}
               >
-                {value}
+                {!isColorOption(option.name) && value}
               </button>
             );
           })}

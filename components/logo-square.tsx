@@ -5,10 +5,10 @@ export default function LogoSquare({ size }: { size?: 'sm' | undefined }) {
   return (
     <div
       className={clsx(
-        'flex flex-none items-center justify-center border border-neutral-200 bg-white dark:border-neutral-700 dark:bg-black',
+        'flex flex-none items-center justify-center border border-neutral-200 bg-white dark:border-neutral-700 dark:bg-black transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-600',
         {
-          'h-[40px] w-[40px] rounded-xl': !size,
-          'h-[30px] w-[30px] rounded-lg': size === 'sm'
+          'h-[42px] w-[42px] rounded-xl shadow-sm': !size,
+          'h-[32px] w-[32px] rounded-lg': size === 'sm'
         }
       )}
     >

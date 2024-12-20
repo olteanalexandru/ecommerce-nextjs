@@ -12,6 +12,8 @@ function ThreeItemGridItem({
   size: 'full' | 'half';
   priority?: boolean;
 }) {
+  if (!item?.featuredImage?.url) return null;
+
   return (
     <div
       className={size === 'full' ? 'md:col-span-4 md:row-span-2' : 'md:col-span-2 md:row-span-1'}
