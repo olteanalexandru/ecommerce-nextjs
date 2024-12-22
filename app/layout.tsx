@@ -1,4 +1,4 @@
-import { CartProvider } from 'components/cart/cart-context';
+import { ClientCartProvider } from 'components/cart/client-cart-provider';
 import { LanguageProvider } from 'components/language-context';
 import { Navbar } from 'components/layout/navbar';
 import { WelcomeToast } from 'components/welcome-toast';
@@ -49,7 +49,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   return (
     <html lang={locale} className={GeistSans.variable}>
       <body className="bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
-        <CartProvider cartPromise={cart}>
+        <ClientCartProvider cart={cart}>
           <LanguageProvider locale={locale} messages={messages}>
             <Navbar />
             <main>
@@ -58,7 +58,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
               <WelcomeToast />
             </main>
           </LanguageProvider>
-        </CartProvider>
+        </ClientCartProvider>
       </body>
     </html>
   );

@@ -7,7 +7,8 @@
     "collections": "Collections",
     "close": "Close",
     "openMenu": "Open menu",
-    "siteName": "My Store"
+    "siteName": "My Store",
+    "viewAll": "View all"
   },
   "product": {
     "addToCart": "Add to Cart",
@@ -31,6 +32,9 @@
     "home": "Home",
     "shop": "Shop",
     "about": "About",
-    "contact": "Contact"
+    "contact": "Contact",
+    "categories": "Categories",
+    "collections": "Collections",
+    "trending": "Trending Now"
   }
 }

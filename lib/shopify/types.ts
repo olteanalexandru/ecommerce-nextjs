@@ -50,6 +50,7 @@ export type Image = {
 export type Menu = {
   title: string;
   path: string;
+  items?: Menu[];
 };
 
 export type Money = {
@@ -225,6 +226,10 @@ export type ShopifyMenuOperation = {
       items: {
         title: string;
         url: string;
+        items?: {
+          title: string;
+          url: string;
+        }[];
       }[];
     };
   };

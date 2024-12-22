@@ -1,7 +1,7 @@
 'use client';
 
 import type { Cart, CartItem, Product, ProductVariant } from 'lib/shopify/types';
-import React, { createContext, use, useContext, useMemo, useOptimistic } from 'react';
+import React, { createContext, useContext, useMemo, useOptimistic } from 'react';
 
 type UpdateType = 'plus' | 'minus' | 'delete';
 
@@ -147,12 +147,11 @@ function cartReducer(state: Cart | undefined, action: CartAction): Cart {
 
 export function CartProvider({
   children,
-  cartPromise
+  initialCart
 }: {
   children: React.ReactNode;
-  cartPromise: Promise<Cart | undefined>;
+  initialCart: Cart | undefined;
 }) {
-  const initialCart = use(cartPromise);
   const [optimisticCart, updateOptimisticCart] = useOptimistic(initialCart, cartReducer);
 
   const updateCartItem = (merchandiseId: string, updateType: UpdateType) => {

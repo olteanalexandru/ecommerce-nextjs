@@ -1,13 +1,14 @@
 'use client';
 
-import CartModal from 'components/cart/modal';
+import { CartModalWrapper } from 'components/cart/cart-modal-wrapper';
 import { useTranslation } from 'components/language-context';
 import { LanguageSwitcher } from 'components/language-switcher';
 import LogoSquare from 'components/logo-square';
-import { getMenu } from 'lib/shopify';
-import { Menu } from 'lib/shopify/types';
+import { getCollections, getMenu, getProducts } from 'lib/shopify';
+import { Collection, Menu, Product } from 'lib/shopify/types';
 import Link from 'next/link';
 import { Suspense, useEffect, useState } from 'react';
+import MegaMenu from './mega-menu';
 import MobileMenu from './mobile-menu';
 import Search, { SearchSkeleton } from './search';
 
@@ -15,12 +16,24 @@ const { SITE_NAME } = process.env;
 
 export function Navbar() {
   const [menu, setMenu] = useState<Menu[]>([]);
+  const [collections, setCollections] = useState<Collection[]>();
+  const [products, setProducts] = useState<Product[]>();
   const t = useTranslation;
 
   useEffect(() => {
-    getMenu('next-js-frontend-header-menu').then(menuData => {
+    const fetchData = async () => {
+      const [menuData, collectionsData, productsData] = await Promise.all([
+        getMenu('next-js-frontend-header-menu'),
+        getCollections(),
+        getProducts({ sortKey: 'BEST_SELLING', reverse: false })
+      ]);
+
       setMenu(menuData);
-    });
+      setCollections(collectionsData);
+      setProducts(productsData);
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -43,19 +56,9 @@ export function Navbar() {
             </div>
           </Link>
           {menu.length ? (
-            <ul className="hidden gap-6 text-sm md:flex md:items-center">
-              {menu.map((item: Menu) => (
-                <li key={item.title}>
-                  <Link
-                    href={item.path}
-                    prefetch={true}
-                    className="text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300"
-                  >
-                    {t(`menu.${item.title.toLowerCase()}`)}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <Suspense fallback={null}>
+              <MegaMenu menu={menu} collections={collections} products={products} t={t} />
+            </Suspense>
           ) : null}
         </div>
         <div className="hidden justify-center md:flex md:w-1/3">
@@ -65,7 +68,7 @@ export function Navbar() {
         </div>
         <div className="flex items-center justify-end gap-2 md:w-1/3">
           <LanguageSwitcher />
-          <CartModal />
+          <CartModalWrapper />
         </div>
       </div>
     </nav>

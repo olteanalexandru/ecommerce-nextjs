@@ -7,7 +7,8 @@
     "collections": "Colecții",
     "close": "Închide",
     "openMenu": "Deschide meniu",
-    "siteName": "Magazinul Meu"
+    "siteName": "Magazinul Meu",
+    "viewAll": "Vezi tot"
   },
   "product": {
     "addToCart": "Adaugă în coș",
@@ -31,6 +32,9 @@
     "home": "Acasă",
     "shop": "Magazin",
     "about": "Despre",
-    "contact": "Contact"
+    "contact": "Contact",
+    "categories": "Categorii",
+    "collections": "Colecții",
+    "trending": "Trending Acum"
   }
 }

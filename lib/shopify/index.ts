@@ -348,12 +348,16 @@ export async function getMenu(handle: string): Promise<Menu[]> {
     }
   });
 
-  return (
-    res.body?.data?.menu?.items.map((item: { title: string; url: string }) => ({
-      title: item.title,
-      path: item.url.replace(domain, '').replace('/collections', '/search').replace('/pages', '')
-    })) || []
-  );
+  const processMenuItem = (item: { title: string; url: string; items?: { title: string; url: string }[] }) => ({
+    title: item.title,
+    path: item.url.replace(domain, '').replace('/collections', '/search').replace('/pages', ''),
+    items: item.items?.map(subItem => ({
+      title: subItem.title,
+      path: subItem.url.replace(domain, '').replace('/collections', '/search').replace('/pages', '')
+    }))
+  });
+
+  return res.body?.data?.menu?.items.map(processMenuItem) || [];
 }
 
 export async function getPage(handle: string): Promise<Page> {
