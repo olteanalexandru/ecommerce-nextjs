@@ -1,7 +1,9 @@
 import { CartProvider } from 'components/cart/cart-context';
+import { LanguageProvider } from 'components/language-context';
 import { Navbar } from 'components/layout/navbar';
 import { WelcomeToast } from 'components/welcome-toast';
 import { GeistSans } from 'geist/font/sans';
+import { getServerLocale, getServerMessages } from 'lib/i18n-server';
 import { getCart } from 'lib/shopify';
 import { ensureStartsWith } from 'lib/utils';
 import { cookies } from 'next/headers';
@@ -38,19 +40,24 @@ export const metadata = {
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   const cartId = (await cookies()).get('cartId')?.value;
-  // Don't await the fetch, pass the Promise to the context provider
   const cart = getCart(cartId);
+  
+  // Get locale and translations
+  const locale = await getServerLocale();
+  const messages = await getServerMessages(locale);
 
   return (
-    <html lang="en" className={GeistSans.variable}>
+    <html lang={locale} className={GeistSans.variable}>
       <body className="bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
         <CartProvider cartPromise={cart}>
-          <Navbar />
-          <main>
-            {children}
-            <Toaster closeButton />
-            <WelcomeToast />
-          </main>
+          <LanguageProvider locale={locale} messages={messages}>
+            <Navbar />
+            <main>
+              {children}
+              <Toaster closeButton />
+              <WelcomeToast />
+            </main>
+          </LanguageProvider>
         </CartProvider>
       </body>
     </html>

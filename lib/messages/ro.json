@@ -1,0 +1,36 @@
+{
+  "common": {
+    "cart": "Coș",
+    "search": "Căutare",
+    "menu": "Meniu",
+    "products": "Produse",
+    "collections": "Colecții",
+    "close": "Închide",
+    "openMenu": "Deschide meniu",
+    "siteName": "Magazinul Meu"
+  },
+  "product": {
+    "addToCart": "Adaugă în coș",
+    "outOfStock": "Stoc epuizat",
+    "quantity": "Cantitate",
+    "description": "Descriere",
+    "price": "Preț"
+  },
+  "cart": {
+    "empty": "Coșul tău este gol",
+    "checkout": "Finalizare comandă",
+    "subtotal": "Subtotal",
+    "remove": "Elimină"
+  },
+  "search": {
+    "placeholder": "Caută produse...",
+    "noResults": "Nu s-au găsit rezultate",
+    "filters": "Filtre"
+  },
+  "menu": {
+    "home": "Acasă",
+    "shop": "Magazin",
+    "about": "Despre",
+    "contact": "Contact"
+  }
+}

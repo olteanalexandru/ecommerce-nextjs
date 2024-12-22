@@ -1,4 +1,4 @@
-export default {
+const config = {
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
@@ -8,5 +8,12 @@ export default {
         pathname: '/s/files/**'
       }
     ]
+  },
+  i18n: {
+    locales: ['en', 'ro'],
+    defaultLocale: 'en',
+    localeDetection: true
   }
 };
+
+export default config;

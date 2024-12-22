@@ -9,7 +9,12 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Menu } from 'lib/shopify/types';
 import Search, { SearchSkeleton } from './search';
 
-export default function MobileMenu({ menu }: { menu: Menu[] }) {
+interface MobileMenuProps {
+  menu: Menu[];
+  t: (key: string) => string;
+}
+
+export default function MobileMenu({ menu, t }: MobileMenuProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
@@ -34,7 +39,7 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
     <>
       <button
         onClick={openMobileMenu}
-        aria-label="Open mobile menu"
+        aria-label={t('common.openMenu')}
         className="flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors md:hidden dark:border-neutral-700 dark:text-white"
       >
         <Bars3Icon className="h-4" />
@@ -66,14 +71,14 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
                 <button
                   className="mb-4 flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white"
                   onClick={closeMobileMenu}
-                  aria-label="Close mobile menu"
+                  aria-label={t('common.close')}
                 >
                   <XMarkIcon className="h-6" />
                 </button>
 
                 <div className="mb-4 w-full">
-                  <Suspense fallback={<SearchSkeleton />}>
-                    <Search />
+                  <Suspense fallback={<SearchSkeleton t={t} />}>
+                    <Search t={t} />
                   </Suspense>
                 </div>
                 {menu.length ? (
@@ -84,7 +89,7 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
                         key={item.title}
                       >
                         <Link href={item.path} prefetch={true} onClick={closeMobileMenu}>
-                          {item.title}
+                          {t(`menu.${item.title.toLowerCase()}`)}
                         </Link>
                       </li>
                     ))}
