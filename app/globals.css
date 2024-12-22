@@ -2,10 +2,127 @@
 @tailwind components;
 @tailwind utilities;
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+:root {
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+  --primary: 240 5.9% 10%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 240 4.8% 95.9%;
+  --secondary-foreground: 240 5.9% 10%;
+  --muted: 240 4.8% 95.9%;
+  --muted-foreground: 240 3.8% 46.1%;
+  --accent: 240 4.8% 95.9%;
+  --accent-foreground: 240 5.9% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --ring: 240 5.9% 10%;
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 240 5.9% 10%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 240 4.9% 83.9%;
+}
+
+* {
+  @apply border-border;
+}
+
+body {
+  @apply bg-background text-foreground transition-colors duration-300;
+}
+
+/* Theme transition */
+*, *::before, *::after {
+  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+/* Modern UI Improvements */
+.glass-effect {
+  @apply bg-background/80 backdrop-blur-md border border-border/50;
+}
+
+.hover-card {
+  @apply transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+}
+
+/* Modern Form Elements */
+.modern-input {
+  @apply rounded-lg border border-input bg-background px-4 py-2 text-foreground
+         focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-200;
+}
+
+.modern-button {
+  @apply rounded-lg bg-primary text-primary-foreground px-4 py-2
+         hover:opacity-90 active:scale-95 transition-all duration-200
+         disabled:opacity-50 disabled:pointer-events-none
+         focus:outline-none focus:ring-2 focus:ring-primary/50;
+}
+
+/* Modern Card */
+.modern-card {
+  @apply bg-card text-card-foreground rounded-lg border border-border
+         shadow-sm hover:shadow-md transition-all duration-300
+         hover:border-primary/20;
+}
+
+/* Modern Navigation */
+.nav-link {
+  @apply text-muted-foreground hover:text-foreground transition-colors duration-200
+         relative after:absolute after:bottom-0 after:left-0 after:right-0
+         after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100
+         after:transition-transform after:duration-300;
+}
+
+/* Product Grid Improvements */
+.product-grid {
+  @apply grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+}
+
+.product-card {
+  @apply modern-card overflow-hidden;
+}
+
+.product-image {
+  @apply aspect-square w-full object-cover transition-transform duration-300;
+}
+
+.product-card:hover .product-image {
+  @apply scale-105;
+}
+
+/* Cart Improvements */
+.cart-item {
+  @apply flex items-center gap-4 p-4 border-b border-border last:border-0
+         hover:bg-accent/5 transition-colors duration-200;
+}
+
+/* Toast Improvements */
+.toast {
+  @apply glass-effect p-4 rounded-lg shadow-lg;
 }
 
 @supports (font: -apple-system-body) and (-webkit-appearance: none) {
@@ -14,8 +131,66 @@
   }
 }
 
-a,
-input,
-button {
-  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-50 dark:focus-visible:ring-neutral-600 dark:focus-visible:ring-offset-neutral-900;
+/* Modern UI Elements */
+.card {
+  @apply rounded-lg border bg-card p-6 shadow-sm transition-all duration-200 hover:shadow-md;
+}
+
+.button {
+  @apply inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors 
+  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+  disabled:pointer-events-none disabled:opacity-50;
+}
+
+.button-primary {
+  @apply bg-primary text-primary-foreground hover:bg-primary/90;
+}
+
+.button-secondary {
+  @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
+}
+
+.input {
+  @apply flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm 
+  ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium
+  placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 
+  focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+/* Navigation and Layout */
+.nav-link {
+  @apply text-muted-foreground transition-colors hover:text-foreground;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Product Grid */
+.product-grid {
+  @apply grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
+}
+
+.product-card {
+  @apply card overflow-hidden;
+}
+
+.product-image {
+  @apply aspect-square w-full object-cover transition-transform duration-300 hover:scale-105;
+}
+
+/* Cart */
+.cart-item {
+  @apply flex items-center gap-4 border-b border-border py-4;
+}
+
+/* Toast Notifications */
+.toast {
+  @apply rounded-lg border bg-card p-4 shadow-lg;
 }

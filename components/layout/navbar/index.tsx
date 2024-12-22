@@ -4,6 +4,7 @@ import { CartModalWrapper } from 'components/cart/cart-modal-wrapper';
 import { useTranslation } from 'components/language-context';
 import { LanguageSwitcher } from 'components/language-switcher';
 import LogoSquare from 'components/logo-square';
+import { ThemeToggle } from 'components/theme/theme-toggle';
 import { getCollections, getMenu, getProducts } from 'lib/shopify';
 import { Collection, Menu, Product } from 'lib/shopify/types';
 import Link from 'next/link';
@@ -68,6 +69,7 @@ export function Navbar() {
         </div>
         <div className="flex items-center justify-end gap-2 md:w-1/3">
           <LanguageSwitcher />
+          <ThemeToggle />
           <CartModalWrapper />
         </div>
       </div>

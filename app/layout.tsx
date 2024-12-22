@@ -1,6 +1,7 @@
 import { ClientCartProvider } from 'components/cart/client-cart-provider';
 import { LanguageProvider } from 'components/language-context';
 import { Navbar } from 'components/layout/navbar';
+import { ThemeProvider } from 'components/theme/theme-provider';
 import { WelcomeToast } from 'components/welcome-toast';
 import { GeistSans } from 'geist/font/sans';
 import { getServerLocale, getServerMessages } from 'lib/i18n-server';
@@ -48,17 +49,19 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 
   return (
     <html lang={locale} className={GeistSans.variable}>
-      <body className="bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
-        <ClientCartProvider cart={cart}>
-          <LanguageProvider locale={locale} messages={messages}>
+      <body className="bg-background text-foreground antialiased min-h-screen flex flex-col animate-fade-in selection:bg-primary selection:text-primary-foreground">
+        <ThemeProvider>
+          <ClientCartProvider cart={cart}>
+            <LanguageProvider locale={locale} messages={messages}>
             <Navbar />
             <main>
               {children}
               <Toaster closeButton />
               <WelcomeToast />
             </main>
-          </LanguageProvider>
-        </ClientCartProvider>
+            </LanguageProvider>
+          </ClientCartProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
