@@ -72,13 +72,14 @@ export function Navbar() {
   }, []);
 
   return (
-    <div className="sticky top-0 z-50 bg-white/50 dark:bg-black/50 backdrop-blur-md">
+    <div className="sticky top-0 z-50 bg-white/80 dark:bg-black/80 backdrop-blur-md shadow-lg shadow-primary/5">
       <TopHeader />
       
       {/* Main Header */}
-      <div className="border-b border-neutral-200 dark:border-neutral-800 bg-white/50 dark:bg-black/50">
+      <div className="border-b border-neutral-200 dark:border-neutral-800 bg-white/75 dark:bg-black/75">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between p-4 lg:px-6">
+          <div className="flex items-center justify-between p-4 lg:px-6 relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 pointer-events-none opacity-50" />
             <div className="flex lg:flex-1">
               <Link
                 href="/"
@@ -86,7 +87,7 @@ export function Navbar() {
                 className="mr-2 flex items-center"
               >
                 <LogoSquare />
-                <div className="ml-2 flex-none text-base font-bold uppercase tracking-wide text-foreground">
+                <div className="ml-2 flex-none text-xl font-skate uppercase tracking-wide text-foreground hover:text-primary transition-colors duration-200">
                   {translate('common.siteName')}
                 </div>
               </Link>
@@ -106,10 +107,11 @@ export function Navbar() {
       </div>
 
       {/* Navigation Bar */}
-      <div className="border-b border-neutral-200 dark:border-neutral-800 bg-white/50 dark:bg-black/50">
+      <div className="border-b border-neutral-200 dark:border-neutral-800 bg-white/75 dark:bg-black/75 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-primary/5 pointer-events-none opacity-30" />
         <div className="max-w-7xl mx-auto">
           <div className="hidden md:block">
-            <div className="flex justify-center space-x-8 py-2">
+            <div className="flex justify-center space-x-12 py-3">
               <Suspense fallback={null}>
                 <MegaMenu menu={menu} t={translate} />
               </Suspense>

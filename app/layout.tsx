@@ -49,12 +49,16 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 
   return (
     <html lang={locale} className={GeistSans.variable}>
-      <body className="bg-background text-foreground antialiased min-h-screen flex flex-col animate-fade-in selection:bg-primary selection:text-primary-foreground">
+      <body className="bg-background text-foreground antialiased min-h-screen flex flex-col animate-fade-in selection:bg-primary selection:text-primary-foreground overflow-x-hidden">
+        <div className="fixed inset-0 flex justify-center items-center pointer-events-none opacity-10 dark:opacity-5">
+          <div className="w-[800px] h-[800px] rotate-45 bg-primary/20 rounded-full blur-3xl animate-pulse" />
+        </div>
         <ThemeProvider>
           <ClientCartProvider cart={cart}>
             <LanguageProvider locale={locale} messages={messages}>
             <Navbar />
-            <main>
+            <main className="flex-grow relative">
+              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMtOS45NDEgMC0xOCA4LjA1OS0xOCAxOHM4LjA1OSAxOCAxOCAxOGM5Ljk0MSAwIDE4LTguMDU5IDE4LTE4cy04LjA1OS0xOC0xOC0xOHptMCAzMmMtNy43MzIgMC0xNC02LjI2OC0xNC0xNHM2LjI2OC0xNCAxNCAxNGM3LjczMiAwIDE0IDYuMjY4IDE0IDE0cy02LjI2OCAxNC0xNCAxNHoiIGZpbGw9ImN1cnJlbnRDb2xvciIvPjwvZz48L3N2Zz4=')] bg-repeat opacity-[0.015] dark:opacity-[0.02] -z-10" />
               {children}
               <Toaster closeButton />
               <WelcomeToast />

@@ -8,7 +8,7 @@ export function TopHeader() {
   const { messages } = useLanguage();
 
   return (
-    <div className="w-full bg-neutral-900/50 text-white py-2.5 px-4 lg:px-6 backdrop-blur-md border-b border-neutral-800">
+    <div className="w-full bg-neutral-900/75 text-white py-2.5 px-4 lg:px-6 backdrop-blur-md border-b border-neutral-800">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center space-x-6">
           <a 

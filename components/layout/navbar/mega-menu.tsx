@@ -14,7 +14,8 @@ const MenuLink = ({ href, children, className = '' }: { href: string; children: 
   <Link
     href={href}
     className={`block text-base font-medium text-neutral-800 dark:text-neutral-200 
-    hover:text-primary dark:hover:text-primary transition-colors duration-200 ${className}`}
+    hover:text-primary dark:hover:text-primary transition-all duration-200 
+    hover:translate-x-1 hover:scale-105 ${className}`}
   >
     {children}
   </Link>
@@ -54,9 +55,10 @@ export default function MegaMenu({ menu, t }: { menu: Menu[]; t: (key: string) =
                 <Popover.Panel className="absolute left-1/2 z-50 mt-3 w-screen max-w-7xl -translate-x-1/2 px-4">
                   <div className="overflow-hidden rounded-xl shadow-lg ring-1 ring-black/5 backdrop-blur-lg">
                     <div className="relative grid grid-cols-4 gap-x-8 gap-y-10 bg-white/95 dark:bg-black/95 p-8">
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5 pointer-events-none" />
                       {/* Categories Section */}
                       <div className="col-span-1">
-                        <h3 className="text-sm uppercase tracking-wider text-primary/90 font-semibold mb-6">
+                        <h3 className="text-sm uppercase tracking-wider text-primary font-skate mb-6">
                           {t('menu.categories')}
                         </h3>
                         <div className="space-y-5">
@@ -94,21 +96,21 @@ export default function MegaMenu({ menu, t }: { menu: Menu[]; t: (key: string) =
                               href={`/product/${edge.node.handle}`}
                               className="group"
                             >
-                              <div className="aspect-square overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-900">
+                              <div className="aspect-square overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-900 group-hover:shadow-xl group-hover:shadow-primary/20 transition-all duration-300">
                                 {edge.node.featuredImage && (
                                   <img
                                     src={edge.node.featuredImage.url}
                                     alt={edge.node.featuredImage.altText}
-                                    className="h-full w-full object-cover object-center transform transition-all duration-300
-                                             group-hover:scale-105 group-hover:opacity-90"
+                                    className="h-full w-full object-cover object-center transform transition-all duration-500
+                                             group-hover:scale-110 group-hover:rotate-2 group-hover:opacity-90"
                                   />
                                 )}
                               </div>
                               <div className="mt-4">
-                                <h4 className="text-base font-medium text-neutral-900 dark:text-neutral-100 group-hover:text-primary">
+                                <h4 className="text-base font-skate text-neutral-900 dark:text-neutral-100 group-hover:text-primary">
                                   {edge.node.title}
                                 </h4>
-                                <p className="mt-2 text-sm font-medium text-primary">
+                                <p className="mt-2 text-sm font-skate text-primary">
                                   {formatPrice(edge.node.priceRange.minVariantPrice)}
                                 </p>
                               </div>
@@ -122,14 +124,15 @@ export default function MegaMenu({ menu, t }: { menu: Menu[]; t: (key: string) =
                         <Link
                           href={item.path}
                           className="group flex items-center justify-between rounded-xl p-4 
-                                   hover:bg-primary/5 dark:hover:bg-primary/10 transition-colors duration-200"
+                                   hover:bg-primary/5 dark:hover:bg-primary/10 transition-all duration-300
+                                   hover:shadow-lg hover:shadow-primary/10"
                         >
-                          <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100 
-                                    group-hover:text-primary">
+                          <p className="text-sm font-skate text-neutral-900 dark:text-neutral-100 
+                                    group-hover:text-primary group-hover:scale-105 transition-all duration-300">
                             {t('common.viewAll')}
                           </p>
-                          <span className="text-sm text-primary transform transition-transform duration-200 
-                                       group-hover:translate-x-1">→</span>
+                          <span className="text-sm font-skate text-primary transform transition-all duration-300 
+                                       group-hover:translate-x-2 group-hover:scale-110">→</span>
                         </Link>
                       </div>
                     </div>

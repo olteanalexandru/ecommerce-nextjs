@@ -1,8 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes skate {
+  0% { transform: translateX(-100%) rotate(-5deg); }
+  100% { transform: translateX(100%) rotate(5deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
 
 :root {
   --background: 0 0% 100%;
@@ -11,8 +27,8 @@
   --card-foreground: 240 10% 3.9%;
   --popover: 0 0% 100%;
   --popover-foreground: 240 10% 3.9%;
-  --primary: 346 77% 49.8%;
-  --primary-foreground: 355.7 100% 97.3%;
+  --primary: 35 100% 50%;
+  --primary-foreground: 0 0% 0%;
   --secondary: 240 4.8% 95.9%;
   --secondary-foreground: 240 5.9% 10%;
   --muted: 240 4.8% 95.9%;
@@ -28,14 +44,14 @@
 }
 
 .dark {
-  --background: 20 14.3% 4.1%;
+  --background: 240 10% 4%;
   --foreground: 0 0% 90%;
-  --card: 24 9.8% 10%;
+  --card: 240 10% 8%;
   --card-foreground: 0 0% 90%;
-  --popover: 0 0% 9%;
+  --popover: 240 10% 4%;
   --popover-foreground: 0 0% 90%;
-  --primary: 346 77% 49.8%;
-  --primary-foreground: 355.7 100% 97.3%;
+  --primary: 35 100% 50%;
+  --primary-foreground: 0 0% 0%;
   --secondary: 240 3.7% 15.9%;
   --secondary-foreground: 0 0% 98%;
   --muted: 0 0% 15%;
@@ -58,6 +74,14 @@ html {
 body {
   @apply font-sans text-base font-medium bg-background text-foreground;
   letter-spacing: -0.02em;
+  background-image: 
+    radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, hsl(var(--primary) / 0.05) 0%, transparent 30%);
+  background-attachment: fixed;
+}
+
+.font-skate {
+  font-family: 'Permanent Marker', cursive;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -111,9 +135,10 @@ a {
 .product-card {
   position: relative;
   overflow: hidden;
-  background-color: rgb(255 255 255 / 0.5);
+  background-color: rgb(255 255 255 / 0.8);
   border-radius: var(--radius);
   transition: all 300ms;
+  animation: float 6s ease-in-out infinite;
 }
 
 .dark .product-card {
@@ -121,17 +146,24 @@ a {
 }
 
 .product-card:hover {
-  transform: translateY(-0.75rem) rotate(-1deg);
-  box-shadow: 0 25px 50px -12px rgb(var(--primary) / 0.15);
+  transform: translateY(-0.75rem) rotate(-2deg) scale(1.02);
+  box-shadow: 
+    0 25px 50px -12px rgb(var(--primary) / 0.25),
+    0 0 0 2px rgb(var(--primary) / 0.1);
 }
 
 .product-card::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom right, rgb(var(--primary) / 0.1), transparent);
+  background: linear-gradient(45deg, 
+    rgb(var(--primary) / 0.2),
+    transparent 40%,
+    transparent 60%,
+    rgb(var(--primary) / 0.2)
+  );
   opacity: 0;
-  transition: opacity 300ms;
+  transition: all 500ms;
 }
 
 .product-card:hover::before {
@@ -158,10 +190,11 @@ a {
 }
 
 .product-card h3 {
-  font-weight: 700;
-  font-size: 1.25rem;
+  @apply font-skate;
+  font-size: 1.5rem;
   margin-bottom: 0.5rem;
-  letter-spacing: -0.025em;
+  letter-spacing: 0.02em;
+  color: hsl(var(--primary));
 }
 
 .product-card .price {
@@ -185,7 +218,10 @@ a {
 
 /* Skateshop-specific styles */
 .skate-text {
-  @apply font-black uppercase tracking-tighter;
+  @apply font-skate uppercase tracking-wider;
+  text-shadow: 
+    2px 2px 0 rgb(var(--primary) / 0.3),
+    4px 4px 0 rgb(var(--primary) / 0.1);
 }
 
 .skate-gradient {
@@ -194,10 +230,12 @@ a {
 }
 
 .skate-button {
-  @apply button bg-primary text-white hover:bg-primary/90
-         transform hover:scale-105 hover:rotate-1 
+  @apply button bg-primary text-black font-skate
+         transform hover:scale-105 hover:rotate-2
          transition-all duration-300 uppercase tracking-wider
-         shadow-lg hover:shadow-xl hover:shadow-primary/25;
+         shadow-lg hover:shadow-xl hover:shadow-primary/25
+         border-2 border-black hover:border-primary;
+  animation: pulse 2s infinite;
 }
 
 .skate-card {
@@ -208,8 +246,9 @@ a {
 
 /* Navigation */
 .nav-link {
-  @apply text-lg font-bold uppercase tracking-wide
+  @apply text-lg font-skate uppercase tracking-wide
          transition-all duration-200 relative 
+         hover:text-primary hover:scale-110
          after:absolute after:bottom-0 after:left-0 after:right-0
          after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100
          after:transition-transform after:duration-300 after:origin-left;
