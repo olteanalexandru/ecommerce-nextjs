@@ -16,46 +16,63 @@ export async function generateMetadata(props: {
   params: Promise<{ handle: string }>;
 }): Promise<Metadata> {
   const params = await props.params;
-  const product = await getProduct(params.handle);
+  try {
+    const product = await getProduct(params.handle);
 
-  if (!product) return notFound();
+    if (!product) {
+      console.error(`Product not found for handle: ${params.handle}`);
+      return notFound();
+    }
 
-  const { url, width, height, altText: alt } = product.featuredImage || {};
-  const indexable = !product.tags.includes(HIDDEN_PRODUCT_TAG);
+    const { url, width, height, altText: alt } = product.featuredImage || {};
+    const indexable = !product.tags.includes(HIDDEN_PRODUCT_TAG);
 
-  return {
-    title: product.seo.title || product.title,
-    description: product.seo.description || product.description,
-    robots: {
-      index: indexable,
-      follow: indexable,
-      googleBot: {
+    return {
+      title: product.seo.title || product.title,
+      description: product.seo.description || product.description,
+      robots: {
         index: indexable,
-        follow: indexable
-      }
-    },
-    openGraph: url
-      ? {
-          images: [
-            {
-              url,
-              width,
-              height,
-              alt
-            }
-          ]
+        follow: indexable,
+        googleBot: {
+          index: indexable,
+          follow: indexable
         }
-      : null
-  };
+      },
+      openGraph: url
+        ? {
+            images: [
+              {
+                url,
+                width,
+                height,
+                alt
+              }
+            ]
+          }
+        : null
+    };
+  } catch (error) {
+    console.error(`Error generating metadata for product ${params.handle}:`, error);
+    return {
+      title: 'Product Not Found',
+      description: 'The requested product could not be found.'
+    };
+  }
 }
+
 
 export default async function ProductPage(props: { params: Promise<{ handle: string }> }) {
   const params = await props.params;
-  const product = await getProduct(params.handle);
+  
+  try {
+    const product = await getProduct(params.handle);
 
-  if (!product) return notFound();
+    if (!product) {
+      console.error(`Product not found for handle: ${params.handle}`);
+      return notFound();
+    }
 
-  const productJsonLd = {
+    const productJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.title,
@@ -72,42 +89,46 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
     }
   };
 
-  return (
-    <ProductProvider>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(productJsonLd)
-        }}
-      />
-      <div className="mx-auto max-w-screen-2xl px-4">
-        <div className="flex flex-col rounded-lg border border-neutral-200 bg-white p-8 md:p-12 lg:flex-row lg:gap-8 dark:border-neutral-800 dark:bg-black">
-          <div className="h-full w-full basis-full lg:basis-4/6">
-            <Suspense
-              fallback={
-                <div className="relative aspect-square h-full max-h-[550px] w-full overflow-hidden" />
-              }
-            >
-              <Gallery
-                images={product.images.slice(0, 5).map((image: Image) => ({
-                  src: image.url,
-                  altText: image.altText
-                }))}
-              />
-            </Suspense>
-          </div>
+    return (
+      <ProductProvider>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(productJsonLd)
+          }}
+        />
+        <div className="mx-auto max-w-screen-2xl px-4">
+          <div className="flex flex-col rounded-lg border border-neutral-200 bg-white p-8 md:p-12 lg:flex-row lg:gap-8 dark:border-neutral-800 dark:bg-black">
+            <div className="h-full w-full basis-full lg:basis-4/6">
+              <Suspense
+                fallback={
+                  <div className="relative aspect-square h-full max-h-[550px] w-full overflow-hidden" />
+                }
+              >
+                <Gallery
+                  images={product.images.slice(0, 5).map((image: Image) => ({
+                    src: image.url,
+                    altText: image.altText
+                  }))}
+                />
+              </Suspense>
+            </div>
 
-          <div className="basis-full lg:basis-2/6">
-            <Suspense fallback={null}>
-              <ProductDescription product={product} />
-            </Suspense>
+            <div className="basis-full lg:basis-2/6">
+              <Suspense fallback={null}>
+                <ProductDescription product={product} />
+              </Suspense>
+            </div>
           </div>
+          <RelatedProducts id={product.id} />
         </div>
-        <RelatedProducts id={product.id} />
-      </div>
-      <Footer />
-    </ProductProvider>
-  );
+        <Footer />
+      </ProductProvider>
+    );
+  } catch (error) {
+    console.error(`Error rendering product page for ${params.handle}:`, error);
+    return notFound();
+  }
 }
 
 async function RelatedProducts({ id }: { id: string }) {

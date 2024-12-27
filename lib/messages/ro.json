@@ -30,12 +30,14 @@
     "relatedProducts": "Produse similare"
   },
   "cart": {
+    "title": "Coșul meu",
     "empty": "Coșul tău este gol",
     "checkout": "Finalizează comanda",
     "subtotal": "Subtotal",
     "remove": "Elimină",
     "total": "Total",
     "shipping": "Transport",
+    "shippingCalculated": "Se calculează la finalizarea comenzii",
     "tax": "TVA",
     "discount": "Reducere",
     "applyCoupon": "Aplică cupon",
@@ -43,7 +45,8 @@
     "emptyCartMessage": "Nu ai niciun produs în coș",
     "startShopping": "Începe cumpărăturile",
     "itemAdded": "Produs adăugat",
-    "itemRemoved": "Produs eliminat"
+    "itemRemoved": "Produs eliminat",
+    "quantity": "Cantitate"
   },
   "search": {
     "placeholder": "Caută produse...",

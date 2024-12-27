@@ -87,7 +87,7 @@ export function Navbar() {
                 className="mr-2 flex items-center"
               >
                 <LogoSquare />
-                <div className="ml-2 flex-none text-xl font-skate uppercase tracking-wide text-foreground hover:text-primary transition-colors duration-200">
+                <div className="ml-2 flex-none text-xl font-skate uppercase tracking-wide text-primary hover:text-primary/80 transition-colors duration-200">
                   {translate('common.siteName')}
                 </div>
               </Link>

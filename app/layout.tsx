@@ -41,7 +41,7 @@ export const metadata = {
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   const cartId = (await cookies()).get('cartId')?.value;
-  const cart = getCart(cartId);
+  const cart = cartId ? await getCart(cartId) : undefined;
   
   // Get locale and translations
   const locale = await getServerLocale();
@@ -54,7 +54,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           <div className="w-[800px] h-[800px] rotate-45 bg-primary/20 rounded-full blur-3xl animate-pulse" />
         </div>
         <ThemeProvider>
-          <ClientCartProvider cart={cart}>
+          <ClientCartProvider cart={Promise.resolve(cart)}>
             <LanguageProvider locale={locale} messages={messages}>
             <Navbar />
             <main className="flex-grow relative">
