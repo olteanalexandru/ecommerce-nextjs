@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -47,23 +49,30 @@
   --ring: 224 76.3% 48%;
 }
 
-* {
-  @apply border-border;
+/* Base Typography */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
 }
 
 body {
-  @apply bg-background text-foreground transition-colors duration-300;
+  @apply font-sans text-base font-medium bg-background text-foreground;
+  letter-spacing: -0.02em;
 }
 
-/* Base link styles */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-display font-bold tracking-tight;
+}
+
+h1 { @apply text-4xl mb-6; }
+h2 { @apply text-3xl mb-5; }
+h3 { @apply text-2xl mb-4; }
+h4 { @apply text-xl mb-3; }
+
+/* Modern link styles */
 a {
-  @apply text-blue-600 dark:text-neutral-100 hover:text-primary dark:hover:text-primary 
+  @apply text-lg font-semibold hover:text-primary/80 
          transition-colors duration-200;
-}
-
-/* Links within cards or special containers might need different styling */
-.card a, .modern-card a, .glass-effect a {
-  @apply text-blue-700 dark:text-neutral-200 hover:text-primary;
 }
 
 /* Theme transition */
@@ -75,140 +84,28 @@ a {
               opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes themeSwitch {
-  0% { transform: scale(1) rotate(0); }
-  50% { transform: scale(1.1) rotate(180deg); }
-  100% { transform: scale(1) rotate(360deg); }
-}
-
-.theme-switch-animation {
-  animation: themeSwitch 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Modern UI Improvements */
-.glass-effect {
-  @apply bg-background/80 backdrop-blur-md border border-border/50;
-}
-
-.hover-card {
-  @apply transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
-}
-
-/* Modern Form Elements */
-.modern-input {
-  @apply rounded-lg border border-input bg-background px-4 py-2 text-foreground
-         focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-200;
-}
-
-.modern-button {
-  @apply rounded-lg bg-primary text-primary-foreground px-4 py-2
-         hover:opacity-90 active:scale-95 transition-all duration-200
-         disabled:opacity-50 disabled:pointer-events-none
-         focus:outline-none focus:ring-2 focus:ring-primary/50;
-}
-
-/* Modern Card */
-.modern-card {
-  @apply bg-card text-card-foreground rounded-lg border border-border/60
-         shadow-sm hover:shadow-md transition-all duration-300
-         hover:border-primary/30 hover:bg-card/80;
-}
-
-/* Modern Navigation */
-.nav-link {
-  @apply text-muted-foreground hover:text-foreground transition-colors duration-200
-         relative after:absolute after:bottom-0 after:left-0 after:right-0
-         after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100
-         after:transition-transform after:duration-300;
-}
-
-/* Product Grid Improvements */
-.product-grid {
-  @apply grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
-}
-
-.product-card {
-  @apply modern-card overflow-hidden;
-}
-
-.product-image {
-  @apply aspect-square w-full object-cover transition-transform duration-300;
-}
-
-.product-card:hover .product-image {
-  @apply scale-105;
-}
-
-/* Cart Improvements */
-.cart-item {
-  @apply flex items-center gap-4 p-4 border-b border-border last:border-0
-         hover:bg-accent/5 transition-colors duration-200;
-}
-
-/* Toast Improvements */
-.toast {
-  @apply glass-effect p-4 rounded-lg shadow-lg;
-}
-
-@supports (font: -apple-system-body) and (-webkit-appearance: none) {
-  img[loading='lazy'] {
-    clip-path: inset(0.6px);
-  }
-}
-
 /* Modern UI Elements */
-.card {
-  @apply rounded-xl border bg-card p-6 shadow-sm transition-all duration-300 
-         hover:shadow-lg hover:border-primary/20 hover:-translate-y-0.5;
-}
-
 .button {
-  @apply inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-medium
+  @apply inline-flex items-center justify-center rounded-xl px-6 py-3
+         text-lg font-bold uppercase tracking-wider
          transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 
          focus-visible:ring-ring focus-visible:ring-offset-2 active:scale-95
-         disabled:pointer-events-none disabled:opacity-50 text-foreground;
+         disabled:pointer-events-none disabled:opacity-50;
 }
 
 .button-primary {
-  @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm
-         hover:shadow-md hover:shadow-primary/25;
+  @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-md
+         hover:shadow-lg hover:shadow-primary/25;
 }
 
 .button-secondary {
   @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
 }
 
-.input {
-  @apply flex h-11 w-full rounded-xl border border-input bg-background/50 px-4 py-2 text-sm
-         ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium
-         placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2
-         focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed 
-         disabled:opacity-50 transition-all duration-200 hover:bg-background/80;
-}
-
-/* Navigation and Layout */
-.nav-link {
-  @apply text-blue-700 dark:text-neutral-200 transition-all duration-200 
-         hover:text-primary dark:hover:text-primary relative 
-         after:absolute after:bottom-0 after:left-0 after:right-0
-         after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100
-         after:transition-transform after:duration-300 after:origin-left
-         font-medium;
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-/* Product Grid */
-.product-grid {
-  @apply grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
+/* Modern Card Styles */
+.card {
+  @apply rounded-xl border bg-card p-6 shadow-md transition-all duration-300 
+         hover:shadow-xl hover:border-primary/20 hover:-translate-y-1;
 }
 
 .product-card {
@@ -217,24 +114,50 @@ a {
          bg-white dark:bg-black;
 }
 
+.product-card h3 {
+  @apply font-bold text-xl mb-2;
+}
+
+.product-card .price {
+  @apply text-xl font-bold text-primary;
+}
+
+.product-image {
+  @apply aspect-square w-full object-cover transition-transform duration-500;
+}
+
 .product-card:hover .product-image {
   @apply scale-110 rotate-1;
 }
 
-.product-image {
-  @apply aspect-square w-full object-cover transition-all duration-500;
+/* Navigation */
+.nav-link {
+  @apply text-lg font-bold uppercase tracking-wide
+         transition-all duration-200 relative 
+         after:absolute after:bottom-0 after:left-0 after:right-0
+         after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100
+         after:transition-transform after:duration-300 after:origin-left;
+}
+
+/* Product Grid */
+.product-grid {
+  @apply grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
 }
 
 /* Cart */
 .cart-item {
-  @apply flex items-center gap-4 border-b border-border py-4 px-4
-         hover:bg-accent/5 transition-all duration-200;
+  @apply flex items-center gap-4 border-b border-border py-4 px-6
+         hover:bg-accent/5 transition-all duration-200 text-lg;
 }
 
-/* Toast Notifications */
-.toast {
-  @apply rounded-xl border bg-card/95 backdrop-blur-lg p-4 shadow-lg
-         border-primary/10;
+/* Form Elements */
+.input {
+  @apply flex h-12 w-full rounded-xl border border-input bg-background/50 
+         px-4 py-2 text-lg ring-offset-background
+         placeholder:text-muted-foreground focus-visible:outline-none 
+         focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 
+         disabled:cursor-not-allowed disabled:opacity-50 
+         transition-all duration-200 hover:bg-background/80;
 }
 
 /* Modern Scrollbar */
@@ -253,16 +176,6 @@ a {
 /* Modern Selection */
 ::selection {
   @apply bg-primary/20 text-foreground;
-}
-
-/* Smooth Scroll Behavior */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Modern Focus Styles */
-:focus-visible {
-  @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
 }
 
 /* Carousel Styles */

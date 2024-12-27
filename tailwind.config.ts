@@ -6,7 +6,16 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-geist-sans)']
+        sans: ['var(--font-geist-sans)', 'Rubik', 'system-ui', 'sans-serif'],
+        display: ['Rubik', 'system-ui', 'sans-serif']
+      },
+      fontSize: {
+        'base': '1.125rem',
+        'lg': '1.25rem',
+        'xl': '1.5rem',
+        '2xl': '1.875rem',
+        '3xl': '2.25rem',
+        '4xl': '3rem',
       },
       colors: {
         border: "hsl(var(--border))",
