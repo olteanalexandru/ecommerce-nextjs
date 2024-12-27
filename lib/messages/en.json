@@ -18,10 +18,18 @@
     "price": "Price"
   },
   "cart": {
+    "title": "My Cart",
     "empty": "Your cart is empty",
     "checkout": "Checkout",
     "subtotal": "Subtotal",
-    "remove": "Remove"
+    "remove": "Remove",
+    "openCart": "Open cart",
+    "close": "Close cart",
+    "shippingCalculated": "Calculated at checkout",
+    "tax": "Taxes",
+    "shipping": "Shipping",
+    "total": "Total",
+    "quantity": "Quantity"
   },
   "search": {
     "placeholder": "Search products...",

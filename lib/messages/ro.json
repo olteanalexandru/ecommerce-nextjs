@@ -38,7 +38,7 @@
     "total": "Total",
     "shipping": "Transport",
     "shippingCalculated": "Se calculează la finalizarea comenzii",
-    "tax": "TVA",
+    "tax": "Taxe",
     "discount": "Reducere",
     "applyCoupon": "Aplică cupon",
     "couponCode": "Cod cupon",
@@ -46,7 +46,9 @@
     "startShopping": "Începe cumpărăturile",
     "itemAdded": "Produs adăugat",
     "itemRemoved": "Produs eliminat",
-    "quantity": "Cantitate"
+    "quantity": "Cantitate",
+    "openCart": "Deschide coșul",
+    "close": "Închide coșul"
   },
   "search": {
     "placeholder": "Caută produse...",
