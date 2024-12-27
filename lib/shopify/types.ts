@@ -47,12 +47,6 @@ export type Image = {
   height: number;
 };
 
-export type Menu = {
-  title: string;
-  path: string;
-  items?: Menu[];
-};
-
 export type Money = {
   amount: string;
   currencyCode: string;
@@ -275,3 +269,38 @@ export type ShopifyProductsOperation = {
     sortKey?: string;
   };
 };
+
+export interface MenuItem {
+  title: string;
+  path: string;
+}
+
+export interface Menu {
+  title: string;
+  path: string;
+  items?: MenuItem[];
+  collections?: {
+    edges: Array<{
+      node: {
+        handle: string;
+        title: string;
+        description: string;
+      };
+    }>;
+  };
+  products?: {
+    edges: Array<{
+      node: {
+        handle: string;
+        title: string;
+        featuredImage: {
+          url: string;
+          altText: string;
+        };
+        priceRange: {
+          minVariantPrice: Money;
+        };
+      };
+    }>;
+  };
+}

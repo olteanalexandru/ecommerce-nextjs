@@ -2,16 +2,34 @@
 
 import { Popover, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
-import { Collection, Menu, Money, Product } from 'lib/shopify/types';
+import { defaultMenu } from 'lib/constants';
+import { Menu, Money } from 'lib/shopify/types';
 import Link from 'next/link';
 import { Fragment } from 'react';
 
+interface DefaultCollection {
+  handle: string;
+  title: string;
+  description: string;
+}
+
+interface DefaultProduct {
+  handle: string;
+  title: string;
+  featuredImage: {
+    url: string;
+    altText: string;
+  };
+  priceRange: {
+    minVariantPrice: Money;
+  };
+}
+
 interface MegaMenuProps {
   menu: Menu[];
-  collections?: Collection[];
-  products?: Product[];
   t: (key: string) => string;
 }
+
 
 function formatPrice(price: Money) {
   return `${price.amount} ${price.currencyCode}`;
@@ -27,9 +45,23 @@ const MenuLink = ({ href, children, className = '' }: { href: string; children: 
   </Link>
 );
 
-export default function MegaMenu({ menu, collections, products, t }: MegaMenuProps) {
+export default function MegaMenu({ menu, t }: MegaMenuProps) {
+  // Extract collections and products from the menu data
+  const collections = menu[0]?.collections?.edges?.map(edge => ({
+    handle: edge.node.handle,
+    title: edge.node.title,
+    description: edge.node.description
+  })) || defaultMenu.defaultCollections;
+
+  const products = menu[0]?.products?.edges?.map(edge => ({
+    handle: edge.node.handle,
+    title: edge.node.title,
+    featuredImage: edge.node.featuredImage,
+    priceRange: edge.node.priceRange
+  })) || defaultMenu.defaultProducts;
+
   return (
-    <div className="hidden md:flex items-center gap-8">
+    <div className="hidden md:flex items-center gap-8 relative z-50">
       {menu.map((item: Menu) => (
         <Popover key={item.title} className="relative">
           {({ open }) => (
@@ -59,8 +91,10 @@ export default function MegaMenu({ menu, collections, products, t }: MegaMenuPro
                 leaveTo="opacity-0 translate-y-1"
               >
                 <Popover.Panel className="absolute left-1/2 z-50 mt-3 w-screen max-w-7xl -translate-x-1/2 transform px-2">
-                  <div className="overflow-hidden rounded-xl shadow-xl ring-1 ring-black/5 backdrop-blur-lg">
-                    <div className="relative grid grid-cols-4 gap-x-8 gap-y-10 bg-white/95 dark:bg-black/95 p-8">
+                <div className="overflow-hidden rounded-xl shadow-xl ring-1 ring-black/5 backdrop-blur-lg 
+                              transform transition-all duration-300 ease-in-out hover:shadow-2xl">
+                    <div className="relative grid grid-cols-4 gap-x-8 gap-y-10 bg-white/95 dark:bg-black/95 p-8
+                                  transform transition-all duration-300">
                       {/* Categories Section */}
                       <div className="col-span-1">
                         <h3 className="text-sm uppercase tracking-wider text-primary/90 font-semibold mb-6">
@@ -81,7 +115,7 @@ export default function MegaMenu({ menu, collections, products, t }: MegaMenuPro
                           {t('menu.collections')}
                         </h3>
                         <div className="space-y-5">
-                          {collections?.slice(0, 6).map((collection) => (
+          {collections?.slice(0, 6).map((collection: DefaultCollection) => (
                             <MenuLink key={collection.handle} href={`/search/${collection.handle}`}>
                               {collection.title}
                             </MenuLink>
@@ -95,19 +129,20 @@ export default function MegaMenu({ menu, collections, products, t }: MegaMenuPro
                           {t('menu.trending')}
                         </h3>
                         <div className="grid grid-cols-2 gap-8">
-                          {products?.slice(0, 2).map((product) => (
+          {products?.slice(0, 2).map((product: DefaultProduct) => (
                             <Link
                               key={product.handle}
                               href={`/product/${product.handle}`}
                               className="group"
                             >
                               <div className="aspect-square overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-900 
-                                          transition-transform duration-300 group-hover:scale-105">
+                                          transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg">
                                 {product.featuredImage && (
                                   <img
                                     src={product.featuredImage.url}
                                     alt={product.featuredImage.altText}
-                                    className="h-full w-full object-cover object-center group-hover:opacity-75"
+                                    className="h-full w-full object-cover object-center transform transition-all duration-300
+                                             group-hover:opacity-85 group-hover:scale-110"
                                   />
                                 )}
                               </div>

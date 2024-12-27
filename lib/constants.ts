@@ -20,6 +20,63 @@ export const sorting: SortFilterItem[] = [
   { title: 'Price: High to low', slug: 'price-desc', sortKey: 'PRICE', reverse: true }
 ];
 
+interface DefaultCollection {
+  handle: string;
+  title: string;
+  description: string;
+}
+
+interface DefaultProduct {
+  handle: string;
+  title: string;
+  featuredImage: {
+    url: string;
+    altText: string;
+  };
+  priceRange: {
+    minVariantPrice: {
+      amount: string;
+      currencyCode: string;
+    };
+  };
+}
+
+interface DefaultMenu {
+  defaultCollections: DefaultCollection[];
+  defaultProducts: DefaultProduct[];
+}
+
+export const defaultMenu: DefaultMenu = {
+  defaultCollections: [
+    {
+      handle: 'all',
+      title: 'All Products',
+      description: 'Browse all products'
+    },
+    {
+      handle: 'new-arrivals',
+      title: 'New Arrivals',
+      description: 'Check out our latest products'
+    }
+  ],
+  defaultProducts: [
+    {
+      handle: 'sample-product',
+      title: 'Sample Product',
+      featuredImage: {
+        url: '/placeholder.jpg',
+        altText: 'Sample product image'
+      },
+      priceRange: {
+        minVariantPrice: {
+          amount: '0.00',
+          currencyCode: 'USD'
+        }
+      }
+    }
+  ]
+};
+
 export const TAGS = {
   collections: 'collections',
   products: 'products',
