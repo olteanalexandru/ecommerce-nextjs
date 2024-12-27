@@ -1,40 +1,91 @@
 {
   "common": {
-    "cart": "Coș",
+    "cart": "Coșul meu",
     "search": "Căutare",
     "menu": "Meniu",
     "products": "Produse",
     "collections": "Colecții",
     "close": "Închide",
-    "openMenu": "Deschide meniu",
+    "openMenu": "Deschide meniul",
     "siteName": "Magazinul Meu",
-    "viewAll": "Vezi tot"
+    "viewAll": "Vezi toate"
   },
   "product": {
     "addToCart": "Adaugă în coș",
     "outOfStock": "Stoc epuizat",
     "quantity": "Cantitate",
     "description": "Descriere",
-    "price": "Preț"
+    "price": "Preț",
+    "sale": "Reducere",
+    "new": "Nou",
+    "inStock": "În stoc",
+    "lastItems": "Ultimele bucăți",
+    "size": "Mărime",
+    "color": "Culoare",
+    "selectSize": "Selectează mărimea",
+    "selectColor": "Selectează culoarea",
+    "addedToCart": "Produsul a fost adăugat în coș",
+    "continueShopping": "Continuă cumpărăturile",
+    "viewCart": "Vezi coșul",
+    "relatedProducts": "Produse similare"
   },
   "cart": {
     "empty": "Coșul tău este gol",
-    "checkout": "Finalizare comandă",
+    "checkout": "Finalizează comanda",
     "subtotal": "Subtotal",
-    "remove": "Elimină"
+    "remove": "Elimină",
+    "total": "Total",
+    "shipping": "Transport",
+    "tax": "TVA",
+    "discount": "Reducere",
+    "applyCoupon": "Aplică cupon",
+    "couponCode": "Cod cupon",
+    "emptyCartMessage": "Nu ai niciun produs în coș",
+    "startShopping": "Începe cumpărăturile",
+    "itemAdded": "Produs adăugat",
+    "itemRemoved": "Produs eliminat"
   },
   "search": {
     "placeholder": "Caută produse...",
     "noResults": "Nu s-au găsit rezultate",
-    "filters": "Filtre"
+    "filters": "Filtre",
+    "sortBy": "Sortează după",
+    "priceRange": "Interval de preț",
+    "categories": "Categorii",
+    "clearFilters": "Șterge filtrele",
+    "searchResults": "Rezultatele căutării",
+    "showing": "Se afișează",
+    "of": "din",
+    "products": "produse"
   },
   "menu": {
     "home": "Acasă",
     "shop": "Magazin",
-    "about": "Despre",
+    "about": "Despre noi",
     "contact": "Contact",
     "categories": "Categorii",
     "collections": "Colecții",
-    "trending": "Trending Acum"
+    "trending": "Trending acum",
+    "newArrivals": "Noutăți",
+    "sale": "Reduceri",
+    "blog": "Blog",
+    "account": "Contul meu",
+    "wishlist": "Favorite",
+    "orders": "Comenzile mele",
+    "settings": "Setări"
+  },
+  "footer": {
+    "newsletter": "Abonează-te la newsletter",
+    "subscribeText": "Abonează-te pentru a primi noutăți și oferte speciale",
+    "emailPlaceholder": "Adresa ta de email",
+    "subscribe": "Abonează-te",
+    "followUs": "Urmărește-ne",
+    "customerService": "Servicii clienți",
+    "shipping": "Livrare",
+    "returns": "Returnări",
+    "faq": "Întrebări frecvente",
+    "privacyPolicy": "Politica de confidențialitate",
+    "termsConditions": "Termeni și condiții",
+    "contactUs": "Contactează-ne"
   }
 }

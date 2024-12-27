@@ -13,7 +13,7 @@ export function ThemeToggle() {
                  transition-all duration-300 hover:shadow-md focus:shadow-md
                  hover:-translate-y-0.5 focus:-translate-y-0.5
                  focus:outline-none focus:ring-2 focus:ring-primary/50
-                 bg-background border border-border/50"
+                 bg-background border border-border/50 theme-switch-animation"
       aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
       whileTap={{ scale: 0.9 }}
       initial={false}
@@ -34,7 +34,7 @@ export function ThemeToggle() {
           viewBox="0 0 24 24"
           strokeWidth={2}
           stroke="currentColor"
-          className="w-5 h-5 text-yellow-500"
+          className="w-5 h-5 text-amber-500"
         >
           <path
             strokeLinecap="round"
@@ -60,7 +60,7 @@ export function ThemeToggle() {
           viewBox="0 0 24 24"
           strokeWidth={2}
           stroke="currentColor"
-          className="w-5 h-5 text-blue-600"
+          className="w-5 h-5 text-primary"
         >
           <path
             strokeLinecap="round"
