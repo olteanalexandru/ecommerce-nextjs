@@ -64,8 +64,8 @@ export const defaultMenu: DefaultMenu = {
       handle: 'sample-product',
       title: 'Sample Product',
       featuredImage: {
-        url: '/placeholder.jpg',
-        altText: 'Sample product image'
+        url: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNFNUU3RUIiLz48cGF0aCBkPSJNMTAwIDEwNEw4MCA4NEg2MFY2MEg4MEgxMDBIMTIwSDE0MFY4NEgxMjBMMTAwIDEwNFoiIGZpbGw9IiM5Q0EzQUYiLz48L3N2Zz4=',
+        altText: 'Sample product placeholder'
       },
       priceRange: {
         minVariantPrice: {

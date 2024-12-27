@@ -41,8 +41,9 @@ export function CarouselClient({ products }: CarouselProps) {
       <button
         onClick={prevSlide}
         aria-label="Previous slide"
-        className="absolute left-4 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-white/90 p-3 shadow-lg 
-                 transition-all duration-200 hover:bg-white hover:scale-110 hover:shadow-xl dark:bg-black/90 dark:hover:bg-black
+        className="absolute left-8 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-white/80 p-3 
+                 shadow-lg backdrop-blur-sm transition-all duration-200 hover:bg-white hover:scale-110 
+                 hover:shadow-xl dark:bg-gray-900/80 dark:hover:bg-gray-900
                  focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
       >
         <ChevronLeftIcon className="h-5 w-5 text-gray-800 dark:text-gray-200" />
@@ -50,15 +51,16 @@ export function CarouselClient({ products }: CarouselProps) {
       <button
         onClick={nextSlide}
         aria-label="Next slide"
-        className="absolute right-4 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-white/90 p-3 shadow-lg 
-                 transition-all duration-200 hover:bg-white hover:scale-110 hover:shadow-xl dark:bg-black/90 dark:hover:bg-black
+        className="absolute right-8 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-white/80 p-3 
+                 shadow-lg backdrop-blur-sm transition-all duration-200 hover:bg-white hover:scale-110 
+                 hover:shadow-xl dark:bg-gray-900/80 dark:hover:bg-gray-900
                  focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
       >
         <ChevronRightIcon className="h-5 w-5 text-gray-800 dark:text-gray-200" />
       </button>
 
       {/* Carousel Content */}
-      <div className="relative h-[450px] w-full overflow-hidden rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-900">
+      <div className="relative h-[450px] w-full overflow-hidden bg-transparent">
         <ul 
           className="flex h-full w-full transition-transform duration-500 ease-out"
           style={{ transform: `translate3d(-${currentIndex * 100}%, 0, 0)` }}
@@ -66,11 +68,11 @@ export function CarouselClient({ products }: CarouselProps) {
           {products.map((product) => (
             <li
               key={product.handle}
-              className="relative h-full w-full flex-none px-8 py-6 transition-transform duration-300"
+              className="relative h-full w-full flex-none px-4 py-6 transition-transform duration-300"
             >
               <Link 
                 href={`/product/${product.handle}`} 
-                className="relative block h-full w-full group transform transition-all duration-300 hover:scale-[1.01]"
+                className="relative block h-full w-full transform transition-all duration-300 hover:scale-[1.02]"
               >
                 <GridTileImage
                   alt={product.title}
@@ -81,8 +83,9 @@ export function CarouselClient({ products }: CarouselProps) {
                   }}
                   src={product.featuredImage?.url}
                   fill
-                  sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
-                  className="rounded-lg transition-all duration-300 object-contain bg-transparent group-hover:brightness-105"
+                  sizes="(min-width: 1024px) 100vw, (min-width: 768px) 100vw, 100vw"
+                  className="rounded-lg transition-all duration-300 object-contain bg-transparent 
+                           group-hover:brightness-105 dark:group-hover:brightness-110"
                 />
               </Link>
             </li>
@@ -90,14 +93,16 @@ export function CarouselClient({ products }: CarouselProps) {
         </ul>
 
         {/* Progress Indicators */}
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/10 to-transparent dark:from-black/20 pb-8 pt-16">
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/10 to-transparent 
+                      dark:from-black/30 pb-8 pt-16">
           <div className="flex justify-center gap-2">
             {products.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
                 aria-label={`Go to slide ${index + 1}`}
-                className={`h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400
+                className={`h-2 rounded-full transition-all duration-300 focus:outline-none 
+                          focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400
                           ${index === currentIndex 
                             ? 'w-8 bg-blue-600 dark:bg-blue-400' 
                             : 'w-2 bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500'

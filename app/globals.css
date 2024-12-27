@@ -250,3 +250,20 @@ html {
 :focus-visible {
   @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
 }
+
+/* Carousel Styles */
+.carousel-container {
+  @apply w-full max-w-[2000px] mx-auto overflow-hidden;
+}
+
+.carousel-slide {
+  @apply transition-transform duration-500 ease-out;
+}
+
+.carousel-image {
+  @apply object-contain bg-transparent dark:brightness-95;
+}
+
+.carousel-nav-button {
+  @apply backdrop-blur-sm backdrop-saturate-200;
+}

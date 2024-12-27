@@ -2,23 +2,33 @@
 
 import { CartModalWrapper } from 'components/cart/cart-modal-wrapper';
 import { useLanguage } from 'components/language-context';
-import { LanguageSwitcher } from 'components/language-switcher';
 import LogoSquare from 'components/logo-square';
-import { ThemeToggle } from 'components/theme/theme-toggle';
+import { defaultMenu } from 'lib/constants';
 import { getMenu } from 'lib/shopify';
-import { Collection, Menu, Product } from 'lib/shopify/types';
+import { Menu } from 'lib/shopify/types';
 import Link from 'next/link';
 import { Suspense, useCallback, useEffect, useState } from 'react';
 import MegaMenu from './mega-menu';
 import MobileMenu from './mobile-menu';
 import Search, { SearchSkeleton } from './search';
-
-const { SITE_NAME } = process.env;
+import { TopHeader } from './top-header';
 
 export function Navbar() {
-  const [menu, setMenu] = useState<Menu[]>([]);
-  const [collections, setCollections] = useState<Collection[]>();
-  const [products, setProducts] = useState<Product[]>();
+  const [menu, setMenu] = useState<Menu[]>([{
+    title: 'Shop',
+    path: '/search',
+    items: [],
+    collections: {
+      edges: defaultMenu.defaultCollections.map(collection => ({
+        node: collection
+      }))
+    },
+    products: {
+      edges: defaultMenu.defaultProducts.map(product => ({
+        node: product
+      }))
+    }
+  }]);
   const { messages } = useLanguage();
   
   const translate = useCallback((key: string) => {
@@ -44,13 +54,12 @@ export function Navbar() {
       try {
         const menuData = await getMenu('next-js-frontend-header-menu');
         
-        if (isMounted) {
+        if (isMounted && menuData && menuData.length > 0) {
           setMenu(menuData);
-          // The collections and products are already included in the menu query response
-          // We'll extract them from menuData when needed in the MegaMenu component
         }
       } catch (error) {
         console.error('Error fetching menu data:', error);
+        // Keep using the default menu data set in useState
       }
     };
 
@@ -63,41 +72,56 @@ export function Navbar() {
   }, []);
 
   return (
-    <nav className="relative flex items-center justify-between p-4 lg:px-6">
-      <div className="block flex-none md:hidden">
-        <Suspense fallback={null}>
-          <MobileMenu menu={menu} t={translate} />
-        </Suspense>
-      </div>
-      <div className="flex w-full items-center">
-        <div className="flex w-full md:w-1/3">
-          <Link
-            href="/"
-            prefetch={true}
-            className="mr-2 flex w-full items-center justify-center md:w-auto lg:mr-6"
-          >
-            <LogoSquare />
-            <div className="ml-2 flex-none text-sm font-medium uppercase text-blue-700 dark:text-white md:hidden lg:block">
-              {translate('common.siteName')}
+    <div className="sticky top-0 z-50 bg-white dark:bg-black">
+      <TopHeader />
+      
+      {/* Main Header */}
+      <div className="border-b border-neutral-200 dark:border-neutral-800">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-between p-4 lg:px-6">
+            <div className="flex lg:flex-1">
+              <Link
+                href="/"
+                prefetch={true}
+                className="mr-2 flex items-center"
+              >
+                <LogoSquare />
+                <div className="ml-2 flex-none text-sm font-medium uppercase">
+                  {translate('common.siteName')}
+                </div>
+              </Link>
             </div>
-          </Link>
-          {menu.length ? (
-            <Suspense fallback={null}>
-              <MegaMenu menu={menu} collections={collections} products={products} t={translate} />
-            </Suspense>
-          ) : null}
-        </div>
-        <div className="hidden justify-center md:flex md:w-1/3">
-          <Suspense fallback={<SearchSkeleton t={translate} />}>
-            <Search t={translate} />
-          </Suspense>
-        </div>
-        <div className="flex items-center justify-end gap-2 md:w-1/3">
-          <LanguageSwitcher />
-          <ThemeToggle />
-          <CartModalWrapper />
+
+            <div className="flex flex-1 justify-center px-4">
+              <Suspense fallback={<SearchSkeleton t={translate} />}>
+                <Search t={translate} />
+              </Suspense>
+            </div>
+
+            <div className="flex flex-1 justify-end">
+              <CartModalWrapper />
+            </div>
+          </div>
         </div>
       </div>
-    </nav>
+
+      {/* Navigation Bar */}
+      <div className="border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-black">
+        <div className="max-w-7xl mx-auto">
+          <div className="hidden md:block">
+            <div className="flex justify-center space-x-8 py-2">
+              <Suspense fallback={null}>
+                <MegaMenu menu={menu} t={translate} />
+              </Suspense>
+            </div>
+          </div>
+          <div className="md:hidden">
+            <Suspense fallback={null}>
+              <MobileMenu menu={menu} t={translate} />
+            </Suspense>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
