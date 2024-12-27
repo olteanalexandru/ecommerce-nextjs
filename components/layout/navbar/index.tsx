@@ -72,11 +72,11 @@ export function Navbar() {
   }, []);
 
   return (
-    <div className="sticky top-0 z-50 bg-white dark:bg-black">
+    <div className="sticky top-0 z-50 bg-white/50 dark:bg-black/50 backdrop-blur-md">
       <TopHeader />
       
       {/* Main Header */}
-      <div className="border-b border-neutral-200 dark:border-neutral-800">
+      <div className="border-b border-neutral-200 dark:border-neutral-800 bg-white/50 dark:bg-black/50">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between p-4 lg:px-6">
             <div className="flex lg:flex-1">
@@ -86,7 +86,7 @@ export function Navbar() {
                 className="mr-2 flex items-center"
               >
                 <LogoSquare />
-                <div className="ml-2 flex-none text-sm font-medium uppercase">
+                <div className="ml-2 flex-none text-base font-bold uppercase tracking-wide text-foreground">
                   {translate('common.siteName')}
                 </div>
               </Link>
@@ -106,7 +106,7 @@ export function Navbar() {
       </div>
 
       {/* Navigation Bar */}
-      <div className="border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-black">
+      <div className="border-b border-neutral-200 dark:border-neutral-800 bg-white/50 dark:bg-black/50">
         <div className="max-w-7xl mx-auto">
           <div className="hidden md:block">
             <div className="flex justify-center space-x-8 py-2">

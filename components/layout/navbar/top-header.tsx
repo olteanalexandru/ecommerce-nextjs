@@ -8,29 +8,29 @@ export function TopHeader() {
   const { messages } = useLanguage();
 
   return (
-    <div className="w-full bg-neutral-900 text-white py-2 px-4 lg:px-6">
+    <div className="w-full bg-neutral-900/50 text-white py-2.5 px-4 lg:px-6 backdrop-blur-md border-b border-neutral-800">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-6">
           <a 
             href="tel:+40722222222" 
-            className="text-sm hover:text-primary transition-colors duration-200"
+            className="text-sm font-medium hover:text-primary transition-colors duration-200 flex items-center"
           >
-            <span className="hidden sm:inline">📞</span> +40 722 222 222
+            <span className="hidden sm:inline mr-1.5">📞</span> +40 722 222 222
           </a>
           <a 
             href="mailto:contact@example.com"
-            className="text-sm hover:text-primary transition-colors duration-200"
+            className="text-sm font-medium hover:text-primary transition-colors duration-200 flex items-center"
           >
-            <span className="hidden sm:inline">✉️</span> contact@example.com
+            <span className="hidden sm:inline mr-1.5">✉️</span> contact@example.com
           </a>
         </div>
-        <div className="flex items-center space-x-4">
-          <div className="flex space-x-3">
+        <div className="flex items-center space-x-6">
+          <div className="flex space-x-4">
             <a 
               href="https://facebook.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="hover:text-primary transition-colors duration-200"
+              className="hover:text-primary transition-all duration-200 hover:scale-110"
             >
               <span className="sr-only">Facebook</span>
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -41,7 +41,7 @@ export function TopHeader() {
               href="https://instagram.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="hover:text-primary transition-colors duration-200"
+              className="hover:text-primary transition-all duration-200 hover:scale-110"
             >
               <span className="sr-only">Instagram</span>
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -52,7 +52,7 @@ export function TopHeader() {
               href="https://twitter.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="hover:text-primary transition-colors duration-200"
+              className="hover:text-primary transition-all duration-200 hover:scale-110"
             >
               <span className="sr-only">Twitter</span>
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -60,7 +60,7 @@ export function TopHeader() {
               </svg>
             </a>
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-3 border-l border-neutral-700 pl-6">
             <LanguageSwitcher />
             <ThemeToggle />
           </div>
