@@ -15,7 +15,7 @@ export function LanguageSwitcher() {
   return (
     <button
       onClick={toggleLanguage}
-      className="flex h-8 w-8 items-center justify-center rounded-md border border-neutral-200 text-sm font-medium text-black transition-colors dark:border-neutral-700 dark:text-white"
+      className="flex h-8 w-8 items-center justify-center rounded-md border border-neutral-200 text-sm font-medium text-blue-700 transition-colors dark:border-neutral-700 dark:text-white hover:text-primary"
       aria-label="Switch language"
     >
       {locale === 'en' ? 'RO' : 'EN'}

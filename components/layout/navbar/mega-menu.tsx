@@ -17,17 +17,29 @@ function formatPrice(price: Money) {
   return `${price.amount} ${price.currencyCode}`;
 }
 
+const MenuLink = ({ href, children, className = '' }: { href: string; children: React.ReactNode; className?: string }) => (
+  <Link
+    href={href}
+    className={`block text-base font-medium text-neutral-800 dark:text-neutral-200 
+    hover:text-primary dark:hover:text-primary transition-colors duration-200 ${className}`}
+  >
+    {children}
+  </Link>
+);
+
 export default function MegaMenu({ menu, collections, products, t }: MegaMenuProps) {
   return (
-    <div className="hidden md:flex items-center gap-6">
+    <div className="hidden md:flex items-center gap-8">
       {menu.map((item: Menu) => (
         <Popover key={item.title} className="relative">
           {({ open }) => (
             <>
               <Popover.Button
                 className={`${
-                  open ? 'text-black dark:text-white' : 'text-neutral-500 dark:text-neutral-400'
-                } group inline-flex items-center gap-x-1 text-sm font-medium hover:text-black dark:hover:text-neutral-300`}
+                  open ? 'text-primary' : 'text-neutral-800 dark:text-neutral-200'
+                } group inline-flex items-center gap-x-2 text-sm font-semibold 
+                hover:text-primary dark:hover:text-primary transition-colors duration-200
+                focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-md px-2 py-1`}
               >
                 {t(`menu.${item.title.toLowerCase()}`)}
                 <ChevronDownIcon
@@ -46,58 +58,51 @@ export default function MegaMenu({ menu, collections, products, t }: MegaMenuPro
                 leaveFrom="opacity-100 translate-y-0"
                 leaveTo="opacity-0 translate-y-1"
               >
-                <Popover.Panel className="absolute left-1/2 z-10 mt-3 w-screen max-w-7xl -translate-x-1/2 transform px-2">
-                  <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                    <div className="relative grid grid-cols-4 gap-8 bg-white p-8 dark:bg-black">
+                <Popover.Panel className="absolute left-1/2 z-50 mt-3 w-screen max-w-7xl -translate-x-1/2 transform px-2">
+                  <div className="overflow-hidden rounded-xl shadow-xl ring-1 ring-black/5 backdrop-blur-lg">
+                    <div className="relative grid grid-cols-4 gap-x-8 gap-y-10 bg-white/95 dark:bg-black/95 p-8">
                       {/* Categories Section */}
                       <div className="col-span-1">
-                        <h3 className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-4">
+                        <h3 className="text-sm uppercase tracking-wider text-primary/90 font-semibold mb-6">
                           {t('menu.categories')}
                         </h3>
-                        <div className="space-y-4">
+                        <div className="space-y-5">
                           {item.items?.map((subItem) => (
-                            <Link
-                              key={subItem.title}
-                              href={subItem.path}
-                              className="block text-base font-medium text-black dark:text-white hover:text-neutral-500 dark:hover:text-neutral-300"
-                            >
+                            <MenuLink key={subItem.title} href={subItem.path}>
                               {t(`menu.${subItem.title.toLowerCase()}`)}
-                            </Link>
+                            </MenuLink>
                           ))}
                         </div>
                       </div>
 
                       {/* Collections Section */}
                       <div className="col-span-1">
-                        <h3 className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-4">
+                        <h3 className="text-sm uppercase tracking-wider text-primary/90 font-semibold mb-6">
                           {t('menu.collections')}
                         </h3>
-                        <div className="space-y-4">
+                        <div className="space-y-5">
                           {collections?.slice(0, 6).map((collection) => (
-                            <Link
-                              key={collection.handle}
-                              href={`/search/${collection.handle}`}
-                              className="block text-base font-medium text-black dark:text-white hover:text-neutral-500 dark:hover:text-neutral-300"
-                            >
+                            <MenuLink key={collection.handle} href={`/search/${collection.handle}`}>
                               {collection.title}
-                            </Link>
+                            </MenuLink>
                           ))}
                         </div>
                       </div>
 
                       {/* Trending Products Section */}
                       <div className="col-span-2">
-                        <h3 className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-4">
+                        <h3 className="text-sm uppercase tracking-wider text-primary/90 font-semibold mb-6">
                           {t('menu.trending')}
                         </h3>
-                        <div className="grid grid-cols-2 gap-6">
+                        <div className="grid grid-cols-2 gap-8">
                           {products?.slice(0, 2).map((product) => (
                             <Link
                               key={product.handle}
                               href={`/product/${product.handle}`}
                               className="group"
                             >
-                              <div className="aspect-square overflow-hidden rounded-lg bg-neutral-100 dark:bg-neutral-900">
+                              <div className="aspect-square overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-900 
+                                          transition-transform duration-300 group-hover:scale-105">
                                 {product.featuredImage && (
                                   <img
                                     src={product.featuredImage.url}
@@ -106,11 +111,11 @@ export default function MegaMenu({ menu, collections, products, t }: MegaMenuPro
                                   />
                                 )}
                               </div>
-                              <div className="mt-2">
-                                <h4 className="text-sm font-medium text-black dark:text-white">
+                              <div className="mt-4">
+                                <h4 className="text-base font-medium text-neutral-900 dark:text-neutral-100 group-hover:text-primary transition-colors duration-200">
                                   {product.title}
                                 </h4>
-                                <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+                                <p className="mt-2 text-sm font-medium text-primary">
                                   {formatPrice(product.priceRange.minVariantPrice)}
                                 </p>
                               </div>
@@ -120,15 +125,18 @@ export default function MegaMenu({ menu, collections, products, t }: MegaMenuPro
                       </div>
 
                       {/* View All Link */}
-                      <div className="col-span-4 border-t border-neutral-200 dark:border-neutral-700 pt-6 mt-6">
+                      <div className="col-span-4 border-t border-neutral-200 dark:border-neutral-800 pt-6 mt-6">
                         <Link
                           href={item.path}
-                          className="flex items-center justify-between rounded-lg p-3 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                          className="group flex items-center justify-between rounded-xl p-4 
+                                   hover:bg-primary/5 dark:hover:bg-primary/10 transition-colors duration-200"
                         >
-                          <p className="text-sm font-medium text-black dark:text-white">
+                          <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100 
+                                    group-hover:text-primary transition-colors duration-200">
                             {t('common.viewAll')}
                           </p>
-                          <span className="text-sm text-neutral-500 dark:text-neutral-400">→</span>
+                          <span className="text-sm text-primary transform transition-transform duration-200 
+                                       group-hover:translate-x-1">→</span>
                         </Link>
                       </div>
                     </div>

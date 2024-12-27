@@ -4,47 +4,47 @@
 
 :root {
   --background: 0 0% 100%;
-  --foreground: 240 10% 3.9%;
+  --foreground: 224 71.4% 4.1%;
   --card: 0 0% 100%;
-  --card-foreground: 240 10% 3.9%;
+  --card-foreground: 224 71.4% 4.1%;
   --popover: 0 0% 100%;
-  --popover-foreground: 240 10% 3.9%;
-  --primary: 240 5.9% 10%;
-  --primary-foreground: 0 0% 98%;
-  --secondary: 240 4.8% 95.9%;
-  --secondary-foreground: 240 5.9% 10%;
-  --muted: 240 4.8% 95.9%;
-  --muted-foreground: 240 3.8% 46.1%;
-  --accent: 240 4.8% 95.9%;
-  --accent-foreground: 240 5.9% 10%;
+  --popover-foreground: 224 71.4% 4.1%;
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 36.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
   --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 0 0% 98%;
-  --border: 240 5.9% 90%;
-  --input: 240 5.9% 90%;
-  --ring: 240 5.9% 10%;
-  --radius: 0.75rem;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 221 83% 53%;
+  --radius: 1rem;
 }
 
 .dark {
-  --background: 240 10% 3.9%;
-  --foreground: 0 0% 98%;
-  --card: 240 10% 3.9%;
-  --card-foreground: 0 0% 98%;
-  --popover: 240 10% 3.9%;
-  --popover-foreground: 0 0% 98%;
-  --primary: 0 0% 98%;
-  --primary-foreground: 240 5.9% 10%;
-  --secondary: 240 3.7% 15.9%;
-  --secondary-foreground: 0 0% 98%;
-  --muted: 240 3.7% 15.9%;
-  --muted-foreground: 240 5% 64.9%;
-  --accent: 240 3.7% 15.9%;
-  --accent-foreground: 0 0% 98%;
+  --background: 222 47% 11%;
+  --foreground: 210 40% 98%;
+  --card: 222 47% 11%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222 47% 11%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 217 91% 60%;
+  --primary-foreground: 222 47% 11%;
+  --secondary: 217 32% 17%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217 32% 17%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217 32% 17%;
+  --accent-foreground: 210 40% 98%;
   --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 0 0% 98%;
-  --border: 240 3.7% 15.9%;
-  --input: 240 3.7% 15.9%;
-  --ring: 240 4.9% 83.9%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217 32% 17%;
+  --input: 217 32% 17%;
+  --ring: 224 76.3% 48%;
 }
 
 * {
@@ -53,6 +53,17 @@
 
 body {
   @apply bg-background text-foreground transition-colors duration-300;
+}
+
+/* Base link styles */
+a {
+  @apply text-blue-600 dark:text-neutral-100 hover:text-primary dark:hover:text-primary 
+         transition-colors duration-200;
+}
+
+/* Links within cards or special containers might need different styling */
+.card a, .modern-card a, .glass-effect a {
+  @apply text-blue-700 dark:text-neutral-200 hover:text-primary;
 }
 
 /* Theme transition */
@@ -84,9 +95,9 @@ body {
 
 /* Modern Card */
 .modern-card {
-  @apply bg-card text-card-foreground rounded-lg border border-border
+  @apply bg-card text-card-foreground rounded-lg border border-border/60
          shadow-sm hover:shadow-md transition-all duration-300
-         hover:border-primary/20;
+         hover:border-primary/30 hover:bg-card/80;
 }
 
 /* Modern Navigation */
@@ -133,17 +144,20 @@ body {
 
 /* Modern UI Elements */
 .card {
-  @apply rounded-lg border bg-card p-6 shadow-sm transition-all duration-200 hover:shadow-md;
+  @apply rounded-xl border bg-card p-6 shadow-sm transition-all duration-300 
+         hover:shadow-lg hover:border-primary/20 hover:-translate-y-0.5;
 }
 
 .button {
-  @apply inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors 
-  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
-  disabled:pointer-events-none disabled:opacity-50;
+  @apply inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-medium
+         transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 
+         focus-visible:ring-ring focus-visible:ring-offset-2 active:scale-95
+         disabled:pointer-events-none disabled:opacity-50 text-foreground;
 }
 
 .button-primary {
-  @apply bg-primary text-primary-foreground hover:bg-primary/90;
+  @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm
+         hover:shadow-md hover:shadow-primary/25;
 }
 
 .button-secondary {
@@ -151,15 +165,21 @@ body {
 }
 
 .input {
-  @apply flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm 
-  ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium
-  placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 
-  focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  @apply flex h-11 w-full rounded-xl border border-input bg-background/50 px-4 py-2 text-sm
+         ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium
+         placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2
+         focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed 
+         disabled:opacity-50 transition-all duration-200 hover:bg-background/80;
 }
 
 /* Navigation and Layout */
 .nav-link {
-  @apply text-muted-foreground transition-colors hover:text-foreground;
+  @apply text-blue-700 dark:text-neutral-200 transition-all duration-200 
+         hover:text-primary dark:hover:text-primary relative 
+         after:absolute after:bottom-0 after:left-0 after:right-0
+         after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100
+         after:transition-transform after:duration-300 after:origin-left
+         font-medium;
 }
 
 /* Animations */
@@ -174,23 +194,59 @@ body {
 
 /* Product Grid */
 .product-grid {
-  @apply grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
+  @apply grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
 }
 
 .product-card {
-  @apply card overflow-hidden;
+  @apply card overflow-hidden hover:shadow-xl hover:shadow-primary/10
+         hover:-translate-y-1 transition-all duration-300
+         bg-white dark:bg-black;
+}
+
+.product-card:hover .product-image {
+  @apply scale-110 rotate-1;
 }
 
 .product-image {
-  @apply aspect-square w-full object-cover transition-transform duration-300 hover:scale-105;
+  @apply aspect-square w-full object-cover transition-all duration-500;
 }
 
 /* Cart */
 .cart-item {
-  @apply flex items-center gap-4 border-b border-border py-4;
+  @apply flex items-center gap-4 border-b border-border py-4 px-4
+         hover:bg-accent/5 transition-all duration-200;
 }
 
 /* Toast Notifications */
 .toast {
-  @apply rounded-lg border bg-card p-4 shadow-lg;
+  @apply rounded-xl border bg-card/95 backdrop-blur-lg p-4 shadow-lg
+         border-primary/10;
+}
+
+/* Modern Scrollbar */
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-secondary/50;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/50 rounded-full hover:bg-primary/70 transition-colors duration-200;
+}
+
+/* Modern Selection */
+::selection {
+  @apply bg-primary/20 text-foreground;
+}
+
+/* Smooth Scroll Behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Modern Focus Styles */
+:focus-visible {
+  @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
 }

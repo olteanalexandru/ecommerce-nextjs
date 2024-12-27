@@ -18,7 +18,7 @@ export default async function Footer() {
     <footer className="text-sm text-neutral-500 dark:text-neutral-400">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 border-t border-neutral-200 px-6 py-12 text-sm md:flex-row md:gap-12 md:px-4 min-[1320px]:px-0 dark:border-neutral-700">
         <div>
-          <Link className="flex items-center gap-2 text-black md:pt-1 dark:text-white" href="/">
+          <Link className="flex items-center gap-2 text-blue-700 md:pt-1 dark:text-white hover:text-primary" href="/">
             <LogoSquare size="sm" />
             <span className="uppercase">{SITE_NAME}</span>
           </Link>
@@ -58,7 +58,7 @@ export default async function Footer() {
        
       
           <p className="md:ml-auto">
-            <a href="https://oltean.tech" className="text-black dark:text-white">
+            <a href="https://oltean.tech" className="text-blue-600 dark:text-white hover:text-primary">
               Created by OLTEAN.TECH
             </a>
           </p>
