@@ -8,7 +8,9 @@
     "close": "Close",
     "openMenu": "Open menu",
     "siteName": "My Store",
-    "viewAll": "View all"
+    "viewAll": "View all",
+    "account": "Account",
+    "login": "Login"
   },
   "product": {
     "addToCart": "Add to Cart",
@@ -57,6 +59,9 @@
     "footwear": "Footwear",
     "blog": "Blog",
     "account": "Account",
-    "wishlist": "Wishlist"
+    "wishlist": "Wishlist",
+    "orders": "Orders",
+    "profile": "Profile",
+    "settings": "Settings"
   }
 }

@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
 @tailwind base;
@@ -88,14 +87,14 @@ h1, h2, h3, h4, h5, h6 {
   @apply font-display font-bold tracking-tight;
 }
 
-h1 { @apply text-4xl mb-6; }
-h2 { @apply text-3xl mb-5; }
-h3 { @apply text-2xl mb-4; }
-h4 { @apply text-xl mb-3; }
+h1 { @apply text-3xl mb-4; }
+h2 { @apply text-2xl mb-4; }
+h3 { @apply text-xl mb-3; }
+h4 { @apply text-lg mb-2; }
 
 /* Modern link styles */
 a {
-  @apply text-lg font-semibold hover:text-primary/80 
+  @apply text-base font-semibold hover:text-primary/80 
          transition-colors duration-200;
 }
 
@@ -191,14 +190,14 @@ a {
 
 .product-card h3 {
   @apply font-skate;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   margin-bottom: 0.5rem;
   letter-spacing: 0.02em;
   color: hsl(var(--primary));
 }
 
 .product-card .price {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 900;
   color: hsl(var(--primary));
   letter-spacing: -0.05em;
@@ -246,7 +245,7 @@ a {
 
 /* Navigation */
 .nav-link {
-  @apply text-lg font-skate uppercase tracking-wide
+  @apply text-base font-skate uppercase tracking-wide
          transition-all duration-200 relative 
          hover:text-primary hover:scale-110
          after:absolute after:bottom-0 after:left-0 after:right-0
@@ -261,14 +260,14 @@ a {
 
 /* Cart */
 .cart-item {
-  @apply flex items-center gap-4 border-b border-border py-4 px-6
-         hover:bg-accent/5 transition-all duration-200 text-lg;
+  @apply flex items-center gap-4 border-b border-border py-3 px-5
+         hover:bg-accent/5 transition-all duration-200 text-base;
 }
 
 /* Form Elements */
 .input {
-  @apply flex h-12 w-full rounded-xl border border-input bg-background/50 
-         px-4 py-2 text-lg ring-offset-background
+  @apply flex h-10 w-full rounded-xl border border-input bg-background/50 
+         px-4 py-2 text-base ring-offset-background
          placeholder:text-muted-foreground focus-visible:outline-none 
          focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 
          disabled:cursor-not-allowed disabled:opacity-50 
@@ -308,4 +307,25 @@ a {
 
 .carousel-nav-button {
   @apply backdrop-blur-sm backdrop-saturate-200;
+}
+
+/* Header Styles */
+#main-header {
+  position: relative;
+  top: 0;
+  transition: transform 0.3s ease;
+}
+
+#main-header.is-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  backdrop-filter: blur(8px);
+  background-color: rgb(255 255 255 / 0.9);
+}
+
+.dark #main-header.is-fixed {
+  background-color: rgb(0 0 0 / 0.8);
 }

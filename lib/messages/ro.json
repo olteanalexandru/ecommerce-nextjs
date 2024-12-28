@@ -8,7 +8,9 @@
     "close": "Închide",
     "openMenu": "Deschide meniul",
     "siteName": "Magazinul Meu",
-    "viewAll": "Vezi toate"
+    "viewAll": "Vezi toate",
+    "account": "Cont",
+    "login": "Autentificare"
   },
   "product": {
     "addToCart": "Adaugă în coș",
@@ -84,7 +86,10 @@
     "footwear": "Încălțăminte",
     "blog": "Blog",
     "account": "Cont",
-    "wishlist": "Favorite"
+    "wishlist": "Favorite",
+    "orders": "Comenzile mele",
+    "profile": "Profil",
+    "settings": "Setări"
   },
   "footer": {
     "newsletter": "Abonează-te la newsletter",

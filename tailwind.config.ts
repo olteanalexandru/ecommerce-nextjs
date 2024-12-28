@@ -6,8 +6,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-geist-sans)', 'Rubik', 'system-ui', 'sans-serif'],
-        display: ['Rubik', 'system-ui', 'sans-serif']
+        sans: ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-geist-sans)', 'system-ui', 'sans-serif']
       },
       fontSize: {
         'base': '1.125rem',

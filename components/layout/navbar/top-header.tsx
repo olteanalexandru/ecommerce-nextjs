@@ -3,34 +3,43 @@
 import { useLanguage } from 'components/language-context';
 import { LanguageSwitcher } from 'components/language-switcher';
 import { ThemeToggle } from 'components/theme/theme-toggle';
+import Link from 'next/link';
 
 export function TopHeader() {
   const { messages } = useLanguage();
 
   return (
-    <div className="w-full bg-neutral-900/75 text-white py-2.5 px-4 lg:px-6 backdrop-blur-md border-b border-neutral-800">
+    <div className="w-full bg-gradient-to-r from-neutral-900/90 via-neutral-900/75 to-neutral-900/90 text-white py-2.5 px-4 lg:px-6 backdrop-blur-md border-b border-neutral-800">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center space-x-6">
-          <a 
-            href="tel:+40722222222" 
-            className="text-sm font-medium hover:text-primary transition-colors duration-200 flex items-center"
+          <a
+            href="tel:+40755494691"
+            className="text-sm font-medium hover:text-primary transition-all duration-300 flex items-center group"
           >
-            <span className="hidden sm:inline mr-1.5">📞</span> +40 722 222 222
+            <span className="hidden sm:flex items-center justify-center w-5 h-5 mr-2 bg-primary/10 rounded-full group-hover:scale-110 transition-transform duration-300">📞</span>
+            <span className="group-hover:translate-x-0.5 transition-transform duration-300">+40 755 494 691</span>
           </a>
-          <a 
-            href="mailto:contact@example.com"
-            className="text-sm font-medium hover:text-primary transition-colors duration-200 flex items-center"
+          <a
+            href="mailto:oltean.alexandru11@gmail.com"
+            className="text-sm font-medium hover:text-primary transition-all duration-300 flex items-center group"
           >
-            <span className="hidden sm:inline mr-1.5">✉️</span> contact@example.com
+            <span className="hidden sm:flex items-center justify-center w-5 h-5 mr-2 bg-primary/10 rounded-full group-hover:scale-110 transition-transform duration-300">✉️</span>
+            <span className="group-hover:translate-x-0.5 transition-transform duration-300">oltean.alexandru11@gmail.com</span>
           </a>
         </div>
-        <div className="flex items-center space-x-6">
-          <div className="flex space-x-4">
+        <div className="flex items-center space-x-4">
+          <Link
+            href="/contact"
+            className="text-sm font-semibold hover:text-primary transition-colors duration-200 flex items-center"
+          >
+            Contact
+          </Link>
+          <div className="flex space-x-4 border-l border-neutral-700/50 pl-4">
             <a 
               href="https://facebook.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="hover:text-primary transition-all duration-200 hover:scale-110"
+              className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-0.5"
             >
               <span className="sr-only">Facebook</span>
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -41,7 +50,7 @@ export function TopHeader() {
               href="https://instagram.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="hover:text-primary transition-all duration-200 hover:scale-110"
+              className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-0.5"
             >
               <span className="sr-only">Instagram</span>
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -52,7 +61,7 @@ export function TopHeader() {
               href="https://twitter.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="hover:text-primary transition-all duration-200 hover:scale-110"
+              className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-0.5"
             >
               <span className="sr-only">Twitter</span>
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -60,7 +69,7 @@ export function TopHeader() {
               </svg>
             </a>
           </div>
-          <div className="flex items-center space-x-3 border-l border-neutral-700 pl-6">
+          <div className="flex items-center space-x-3 border-l border-neutral-700/50 pl-4">
             <LanguageSwitcher />
             <ThemeToggle />
           </div>
