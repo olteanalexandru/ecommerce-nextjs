@@ -1,4 +1,5 @@
 import { ClientCartProvider } from 'components/cart/client-cart-provider';
+import { CookieConsentBanner } from 'components/cookie-consent';
 import { Navbar } from 'components/layout/navbar';
 import { Providers } from 'components/providers';
 import { ThemeProvider } from 'components/theme/theme-provider';
@@ -58,6 +59,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
               <main className="flex-grow">
                 {children}
               </main>
+              <CookieConsentBanner />
             </ClientCartProvider>
           </Providers>
         </ThemeProvider>

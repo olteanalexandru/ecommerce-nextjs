@@ -35,13 +35,13 @@ export default async function Footer() {
   return (
     <footer className="text-sm text-foreground relative">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-primary/5 pointer-events-none" />
-      <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-6 border-t border-border px-6 py-12 text-sm md:flex-row md:gap-12 md:px-4 min-[1320px]:px-0">
-        <div>
+      <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-8 border-t border-border px-6 py-12 text-sm md:flex-row md:gap-16 md:px-4 min-[1320px]:px-0">
+        <div className="flex flex-col gap-4">
           <Link className="flex items-center gap-2 text-primary md:pt-1 hover:text-primary/80 transition-all duration-200 hover:scale-105" href="/">
             <LogoSquare size="sm" />
             <span className="font-skate text-lg uppercase">{SITE_NAME}</span>
           </Link>
-          <div className="flex gap-4 mt-4 md:mt-0">
+          <div className="flex gap-4">
             <a href="#" className="text-muted-foreground hover:text-primary transition-all duration-200 hover:scale-110">
               <InstagramIcon />
             </a>
@@ -53,40 +53,52 @@ export default async function Footer() {
             </a>
           </div>
         </div>
-        <Suspense
-          fallback={
-            <div className="flex h-[188px] w-[200px] flex-col gap-2">
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-            </div>
-          }
-        >
-          <FooterMenu menu={menu} />
-        </Suspense>
-        {/* <div className="md:ml-auto">
-          <a
-            className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white"
-            aria-label="Deploy on Vercel"
-            href="https://vercel.com/templates/next.js/nextjs-commerce"
+
+        <div className="grid grid-cols-2 gap-8 md:gap-16">
+          <Suspense
+            fallback={
+              <div className="flex h-[188px] w-[200px] flex-col gap-2">
+                <div className={skeleton} />
+                <div className={skeleton} />
+                <div className={skeleton} />
+                <div className={skeleton} />
+                <div className={skeleton} />
+                <div className={skeleton} />
+              </div>
+            }
           >
-            <span className="px-3">▲</span>
-            <hr className="h-full border-r border-neutral-200 dark:border-neutral-700" />
-            <span className="px-3">Deploy</span>
-          </a>
-        </div> */}
+            <FooterMenu menu={menu} />
+          </Suspense>
+
+          <div>
+            <h3 className="mb-4 text-base font-medium">Legal</h3>
+            <ul className="space-y-3">
+              <li>
+                <Link href="/legal/faq" className="text-muted-foreground hover:text-primary transition-colors duration-200">
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link href="/legal/cookies" className="text-muted-foreground hover:text-primary transition-colors duration-200">
+                  Cookie Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/legal/terms" className="text-muted-foreground hover:text-primary transition-colors duration-200">
+                  Terms & Conditions
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
+
       <div className="relative border-t border-border py-6 text-sm">
         <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-1 px-4 md:flex-row md:gap-0 md:px-4 min-[1320px]:px-0 text-muted-foreground">
           <p className="font-skate">
             &copy; {copyrightDate} {copyrightName}
             {copyrightName.length && !copyrightName.endsWith('.') ? '.' : ''} All rights reserved.
           </p>
-       
-      
           <p className="md:ml-auto">
             <a href="https://oltean.tech" className="font-skate text-primary hover:text-primary/80 transition-all duration-200 hover:scale-105">
               Created by OLTEAN.TECH

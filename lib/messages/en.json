@@ -63,5 +63,11 @@
     "orders": "Orders",
     "profile": "Profile",
     "settings": "Settings"
+  },
+  "Cookie": {
+    "accept": "Accept All",
+    "decline": "Decline",
+    "message": "This website uses cookies to enhance your experience and analyze site traffic.",
+    "learnMore": "Learn more"
   }
 }

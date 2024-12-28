@@ -104,5 +104,11 @@
     "privacyPolicy": "Politica de confidențialitate",
     "termsConditions": "Termeni și condiții",
     "contactUs": "Contactează-ne"
+  },
+  "Cookie": {
+    "accept": "Acceptă tot",
+    "decline": "Refuză",
+    "message": "Acest site folosește cookie-uri pentru a îmbunătăți experiența ta și pentru a analiza traficul.",
+    "learnMore": "Află mai multe"
   }
 }
