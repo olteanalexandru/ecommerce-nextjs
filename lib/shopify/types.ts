@@ -232,6 +232,26 @@ export type ShopifyMenuOperation = {
   };
 };
 
+export type ShopifyMegaMenuOperation = {
+  data: {
+    menu?: {
+      items: {
+        title: string;
+        url: string;
+        items?: {
+          title: string;
+          url: string;
+        }[];
+      }[];
+    };
+    collections: Connection<ShopifyCollection>;
+    products: Connection<ShopifyProduct>;
+  };
+  variables: {
+    handle: string;
+  };
+};
+
 export type ShopifyPageOperation = {
   data: { pageByHandle: Page };
   variables: { handle: string };

@@ -22,6 +22,13 @@ const MenuLink = ({ href, children, className = '' }: { href: string; children: 
 );
 
 export default function MegaMenu({ menu, t }: { menu: Menu[]; t: (key: string) => string }) {
+  const formatTitleForTranslation = (title: string) => {
+    // Convert "New Arrivals" to "newArrivals" for translation key
+    return title.toLowerCase()
+      .replace(/\s+/g, '')
+      .replace(/([A-Z])/g, (g) => g[0]!.toLowerCase());
+  };
+
   return (
     <div className="flex items-center gap-8">
       {menu.map((item: Menu) => (
@@ -35,7 +42,7 @@ export default function MegaMenu({ menu, t }: { menu: Menu[]; t: (key: string) =
                 hover:text-primary dark:hover:text-primary transition-colors duration-200
                 focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-md px-2 py-1`}
               >
-                {t(`menu.${item.title.toLowerCase()}`)}
+                {t(`menu.${formatTitleForTranslation(item.title)}`)}
                 <ChevronDownIcon
                   className={`${
                     open ? 'rotate-180 transform' : ''
@@ -64,7 +71,7 @@ export default function MegaMenu({ menu, t }: { menu: Menu[]; t: (key: string) =
                         <div className="space-y-5">
                           {item.items?.map((subItem) => (
                             <MenuLink key={subItem.title} href={subItem.path}>
-                              {t(`menu.${subItem.title.toLowerCase()}`)}
+                              {t(`menu.${formatTitleForTranslation(subItem.title)}`)}
                             </MenuLink>
                           ))}
                         </div>

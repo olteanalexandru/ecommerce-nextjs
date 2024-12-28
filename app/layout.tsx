@@ -4,7 +4,7 @@ import { Providers } from 'components/providers';
 import { ThemeProvider } from 'components/theme/theme-provider';
 import { GeistSans } from 'geist/font/sans';
 import { getServerLocale, getServerMessages } from 'lib/i18n-server';
-import { getCart } from 'lib/shopify';
+import { getCart, getMegaMenu } from 'lib/shopify';
 import { ensureStartsWith } from 'lib/utils';
 import { cookies } from 'next/headers';
 import { ReactNode } from 'react';
@@ -42,6 +42,9 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   const cart = cartId ? await getCart(cartId) : undefined;
   const locale = await getServerLocale();
   const messages = await getServerMessages(locale);
+  const menuData = await getMegaMenu('main-menu');
+
+  console.log('Menu Data in Layout:', menuData);
 
   return (
     <html lang={locale} className={GeistSans.variable}>
@@ -49,7 +52,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <ThemeProvider>
           <Providers locale={locale} messages={messages}>
             <ClientCartProvider cart={Promise.resolve(cart)}>
-              <Navbar />
+              <Navbar initialMenu={menuData} />
               <main className="flex-grow">
                 {children}
               </main>

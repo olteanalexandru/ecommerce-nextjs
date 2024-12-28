@@ -15,6 +15,7 @@ import {
   getCollectionQuery,
   getCollectionsQuery
 } from './queries/collection';
+import { getMegaMenuQuery } from './queries/mega-menu';
 import { getMenuQuery } from './queries/menu';
 import { getPageQuery, getPagesQuery } from './queries/page';
 import {
@@ -38,6 +39,7 @@ import {
   ShopifyCollectionProductsOperation,
   ShopifyCollectionsOperation,
   ShopifyCreateCartOperation,
+  ShopifyMegaMenuOperation,
   ShopifyMenuOperation,
   ShopifyPageOperation,
   ShopifyPagesOperation,
@@ -455,4 +457,33 @@ export async function revalidate(req: NextRequest): Promise<NextResponse> {
   }
 
   return NextResponse.json({ status: 200, revalidated: true, now: Date.now() });
+}
+
+export async function getMegaMenu(handle: string): Promise<Menu[]> {
+  const res = await shopifyFetch<ShopifyMegaMenuOperation>({
+    query: getMegaMenuQuery,
+    tags: [TAGS.collections],
+    variables: {
+      handle
+    }
+  });
+
+  console.log('Mega Menu Response:', res.body?.data);
+
+  const menuItems = res.body?.data?.menu?.items.map(item => ({
+    title: item.title,
+    path: item.url.replace(domain, '').replace('/collections', '/search').replace('/pages', ''),
+    items: item.items?.map(subItem => ({
+      title: subItem.title,
+      path: subItem.url.replace(domain, '').replace('/collections', '/search').replace('/pages', '')
+    })),
+    collections: {
+      edges: res.body?.data?.collections?.edges || []
+    },
+    products: {
+      edges: res.body?.data?.products?.edges || []
+    }
+  })) || [];
+
+  return menuItems;
 }

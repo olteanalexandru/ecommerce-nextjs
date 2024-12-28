@@ -43,6 +43,20 @@
     "contact": "Contact",
     "categories": "Categories",
     "collections": "Collections",
-    "trending": "Trending Now"
+    "trending": "Trending Now",
+    "newarrivals": "New Arrivals",
+    "bestsellers": "Best Sellers",
+    "seasonal": "Seasonal",
+    "featured": "Featured",
+    "brands": "Brands",
+    "popular": "Popular",
+    "new": "New",
+    "sale": "Sale",
+    "clothing": "Clothing",
+    "accessories": "Accessories",
+    "footwear": "Footwear",
+    "blog": "Blog",
+    "account": "Account",
+    "wishlist": "Wishlist"
   }
 }

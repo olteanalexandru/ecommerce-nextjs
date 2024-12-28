@@ -3,32 +3,20 @@
 import { CartModalWrapper } from 'components/cart/cart-modal-wrapper';
 import { useLanguage } from 'components/language-context';
 import LogoSquare from 'components/logo-square';
-import { defaultMenu } from 'lib/constants';
-import { getMenu } from 'lib/shopify';
 import { Menu } from 'lib/shopify/types';
 import Link from 'next/link';
-import { Suspense, useCallback, useEffect, useState } from 'react';
+import { Suspense, useCallback, useState } from 'react';
 import MegaMenu from './mega-menu';
 import MobileMenu from './mobile-menu';
 import Search, { SearchSkeleton } from './search';
 import { TopHeader } from './top-header';
 
-export function Navbar() {
-  const [menu, setMenu] = useState<Menu[]>([{
-    title: 'Shop',
-    path: '/search',
-    items: [],
-    collections: {
-      edges: defaultMenu.defaultCollections.map(collection => ({
-        node: collection
-      }))
-    },
-    products: {
-      edges: defaultMenu.defaultProducts.map(product => ({
-        node: product
-      }))
-    }
-  }]);
+interface NavbarProps {
+  initialMenu: Menu[];
+}
+
+export function Navbar({ initialMenu }: NavbarProps) {
+  const [menu, setMenu] = useState<Menu[]>(initialMenu);
   const { messages } = useLanguage();
   
   const translate = useCallback((key: string) => {
@@ -45,31 +33,6 @@ export function Navbar() {
     
     return current;
   }, [messages]);
-
-  useEffect(() => {
-    let isMounted = true;
-    const controller = new AbortController();
-
-    const fetchData = async () => {
-      try {
-        const menuData = await getMenu('next-js-frontend-header-menu');
-        
-        if (isMounted && menuData && menuData.length > 0) {
-          setMenu(menuData);
-        }
-      } catch (error) {
-        console.error('Error fetching menu data:', error);
-        // Keep using the default menu data set in useState
-      }
-    };
-
-    fetchData();
-
-    return () => {
-      isMounted = false;
-      controller.abort();
-    };
-  }, []);
 
   return (
     <div className="sticky top-0 z-50 bg-white/80 dark:bg-black/80 backdrop-blur-md shadow-lg shadow-primary/5">
