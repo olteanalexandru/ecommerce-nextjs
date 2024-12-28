@@ -97,8 +97,9 @@ export default async function ProductPage(props: { params: Promise<{ handle: str
             __html: JSON.stringify(productJsonLd)
           }}
         />
-        <div className="mx-auto max-w-screen-2xl px-4">
-          <div className="flex flex-col rounded-lg border border-neutral-200 bg-white p-8 md:p-12 lg:flex-row lg:gap-8 dark:border-neutral-800 dark:bg-black">
+        <div className="mx-auto max-w-screen-2xl px-4 py-12">
+          <div className="flex flex-col rounded-lg border border-neutral-800 bg-black/80 backdrop-blur-lg p-8 md:p-12 lg:flex-row lg:gap-8 transition-all duration-500 hover:shadow-xl hover:shadow-primary/20 group">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg pointer-events-none"></div>
             <div className="h-full w-full basis-full lg:basis-4/6">
               <Suspense
                 fallback={
@@ -138,12 +139,12 @@ async function RelatedProducts({ id }: { id: string }) {
 
   return (
     <div className="py-8">
-      <h2 className="mb-4 text-2xl font-bold">Related Products</h2>
-      <ul className="flex w-full gap-4 overflow-x-auto pt-1">
-        {relatedProducts.map((product) => (
+      <h2 className="mb-4 text-2xl font-skate text-white">Related Products</h2>
+      <ul className="grid grid-cols-1 min-[475px]:grid-cols-2 sm:grid-cols-3 gap-4 pt-1">
+        {relatedProducts.slice(0, 3).map((product) => (
           <li
             key={product.handle}
-            className="aspect-square w-full flex-none min-[475px]:w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5"
+            className="aspect-square w-full"
           >
             <Link
               className="relative h-full w-full"

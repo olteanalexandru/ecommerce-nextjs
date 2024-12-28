@@ -5,24 +5,26 @@ import clsx from 'clsx';
 import { addItem } from 'components/cart/actions';
 import { useProduct } from 'components/product/product-context';
 import { Product, ProductVariant } from 'lib/shopify/types';
+import { useTranslations } from 'next-intl';
 import { useActionState } from 'react';
 import { useCart } from './cart-context';
 
-function SubmitButton({
+function SubmitButton({ 
   availableForSale,
   selectedVariantId
 }: {
   availableForSale: boolean;
   selectedVariantId: string | undefined;
 }) {
+  const t = useTranslations('product');
   const buttonClasses =
-    'relative flex w-full items-center justify-center rounded-full bg-blue-600 p-4 tracking-wide text-white';
-  const disabledClasses = 'cursor-not-allowed opacity-60 hover:opacity-60';
+    'relative flex w-fit mx-auto min-w-[200px] items-center justify-center rounded-lg bg-primary p-4 tracking-wide text-white font-skate transition-all duration-300 hover:scale-[1.02] hover:-rotate-1 hover:shadow-xl hover:shadow-primary/20';
+  const disabledClasses = 'cursor-not-allowed opacity-60 hover:opacity-60 hover:scale-100 hover:rotate-0 hover:shadow-none';
 
   if (!availableForSale) {
     return (
       <button disabled className={clsx(buttonClasses, disabledClasses)}>
-        Out Of Stock
+        {t('outOfStock')}
       </button>
     );
   }
@@ -38,7 +40,7 @@ function SubmitButton({
         <div className="absolute left-0 ml-4">
           <PlusIcon className="h-5" />
         </div>
-        Add To Cart
+        {t('addToCart')}
       </button>
     );
   }
@@ -53,7 +55,7 @@ function SubmitButton({
       <div className="absolute left-0 ml-4">
         <PlusIcon className="h-5" />
       </div>
-      Add To Cart
+      {t('addToCart')}
     </button>
   );
 }

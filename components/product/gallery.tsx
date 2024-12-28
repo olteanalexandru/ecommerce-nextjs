@@ -31,14 +31,14 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
       <div className="relative aspect-square h-full max-h-[550px] w-full overflow-hidden">
         {currentImage?.src && (
           <div
-            className={clsx('h-full w-full transition-transform duration-300', {
-              'cursor-zoom-in': !isZoomed,
+            className={clsx('h-full w-full transition-all duration-500', {
+              'cursor-zoom-in hover:scale-110': !isZoomed,
               'cursor-zoom-out scale-150': isZoomed
             })}
             onClick={() => setIsZoomed(!isZoomed)}
           >
             <Image
-              className="h-full w-full object-contain"
+              className="h-full w-full object-contain transition-transform duration-500 ease-out"
               fill
               sizes="(min-width: 1024px) 66vw, 100vw"
               alt={currentImage.altText || ''}
@@ -50,7 +50,7 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
 
         {validImages.length > 1 ? (
           <div className="absolute bottom-[15%] flex w-full justify-center">
-            <div className="mx-auto flex h-11 items-center rounded-full border border-white bg-neutral-50/80 text-neutral-500 backdrop-blur dark:border-black dark:bg-neutral-900/80">
+            <div className="mx-auto flex h-11 items-center rounded-full border border-white bg-neutral-50/80 text-neutral-500 backdrop-blur dark:border-black dark:bg-neutral-900/80 transition-all duration-300 hover:bg-primary/80 hover:text-white">
               <button
                 formAction={() => {
                   const newState = updateImage(previousImageIndex.toString());

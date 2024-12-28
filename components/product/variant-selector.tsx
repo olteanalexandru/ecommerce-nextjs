@@ -42,11 +42,11 @@ export function VariantSelector({
     <form key={option.id}>
       <dl className="mb-8">
         <dt className="mb-4 flex items-center justify-between">
-          <span className="text-sm uppercase tracking-wide">{option.name}</span>
+          <span className="text-sm uppercase tracking-wide text-white">{option.name}</span>
           {isSizeOption(option.name) && (
             <button
               type="button"
-              className="text-xs text-blue-600 hover:text-blue-800 dark:text-blue-400"
+              className="text-xs text-primary hover:text-primary/80"
               onClick={() => window.open('/size-guide', '_blank')}
             >
               Size Guide
@@ -86,12 +86,12 @@ export function VariantSelector({
                 disabled={!isAvailableForSale}
                 title={`${option.name} ${value}${!isAvailableForSale ? ' (Out of Stock)' : ''}`}
                 className={clsx(
-                  'flex min-w-[48px] items-center justify-center rounded-full px-2 py-1 text-sm',
+                  'flex min-w-[48px] items-center justify-center rounded-full px-2 py-1 text-sm text-white',
                   {
-                    'border bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900': !isColorOption(option.name),
+            'border border-neutral-800 bg-neutral-900': !isColorOption(option.name),
                     'h-8 w-8 min-w-0 rounded-full border-2': isColorOption(option.name),
-                    'cursor-default ring-2 ring-blue-600': isActive,
-                    'ring-1 ring-transparent transition duration-300 ease-in-out hover:ring-blue-600':
+            'cursor-default ring-2 ring-primary': isActive,
+            'ring-1 ring-transparent transition duration-300 ease-in-out hover:ring-primary':
                       !isActive && isAvailableForSale,
                     'relative z-10 cursor-not-allowed': !isAvailableForSale
                   }

@@ -9,7 +9,7 @@ export function TopHeader() {
   const { messages } = useLanguage();
 
   return (
-    <div className="w-full relative overflow-hidden text-foreground py-2.5 px-4 lg:px-6 backdrop-blur-sm bg-foreground/5">
+    <div className="w-full relative overflow-hidden text-foreground py-1 px-4 lg:px-6 backdrop-blur-sm bg-foreground/5">
       {/* Subtle noise texture */}
       <div className="absolute inset-0 bg-noise opacity-[0.15] mix-blend-soft-light"></div>
       {/* Simple border */}
