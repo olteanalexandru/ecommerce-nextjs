@@ -63,6 +63,16 @@ const config: Config = {
           from: { opacity: '0' },
           to: { opacity: '1' }
         },
+        'gradient-x': {
+          '0%, 100%': {
+            'background-size': '200% 200%',
+            'background-position': 'left center'
+          },
+          '50%': {
+            'background-size': '200% 200%',
+            'background-position': 'right center'
+          }
+        },
         glitchSlide: {
           '0%': { transform: 'translateX(-100%)' },
           '100%': { transform: 'translateX(100%)' }
@@ -85,6 +95,7 @@ const config: Config = {
         fadeIn: 'fadeIn .3s ease-in-out',
         carousel: 'marquee 60s linear infinite',
         blink: 'blink 1.4s both infinite',
+        'gradient-x': 'gradient-x 15s ease infinite',
         'glitch-slide': 'glitchSlide 3s linear infinite',
         'glitch-slide-reverse': 'glitchSlideReverse 2s linear infinite'
       },

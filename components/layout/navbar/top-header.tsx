@@ -9,37 +9,50 @@ export function TopHeader() {
   const { messages } = useLanguage();
 
   return (
-    <div className="w-full bg-gradient-to-r from-neutral-900/90 via-neutral-900/75 to-neutral-900/90 text-white py-2.5 px-4 lg:px-6 backdrop-blur-md border-b border-neutral-800">
+    <div className="w-full relative overflow-hidden text-foreground py-2.5 px-4 lg:px-6 backdrop-blur-sm bg-foreground/5">
+      {/* Subtle noise texture */}
+      <div className="absolute inset-0 bg-noise opacity-[0.15] mix-blend-soft-light"></div>
+      {/* Simple border */}
+      <div className="absolute h-[1px] bg-foreground/10 w-full bottom-0"></div>
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center space-x-6">
           <a
             href="tel:+40755494691"
-            className="text-sm font-medium hover:text-primary transition-all duration-300 flex items-center group"
+            className="text-sm font-marker hover:text-primary/80 transition-colors duration-200 flex items-center group relative"
           >
-            <span className="hidden sm:flex items-center justify-center w-5 h-5 mr-2 bg-primary/10 rounded-full group-hover:scale-110 transition-transform duration-300">📞</span>
-            <span className="group-hover:translate-x-0.5 transition-transform duration-300">+40 755 494 691</span>
+            <span className="hidden sm:flex items-center justify-center w-5 h-5 mr-2 bg-foreground/5 rounded">
+              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+              </svg>
+            </span>
+            <span className="group-hover:translate-x-0.5 transition-transform duration-300 skew-x-1">+40 755 494 691</span>
           </a>
           <a
             href="mailto:oltean.alexandru11@gmail.com"
-            className="text-sm font-medium hover:text-primary transition-all duration-300 flex items-center group"
+            className="text-sm font-marker hover:text-primary/80 transition-colors duration-200 flex items-center group relative"
           >
-            <span className="hidden sm:flex items-center justify-center w-5 h-5 mr-2 bg-primary/10 rounded-full group-hover:scale-110 transition-transform duration-300">✉️</span>
-            <span className="group-hover:translate-x-0.5 transition-transform duration-300">oltean.alexandru11@gmail.com</span>
+            <span className="hidden sm:flex items-center justify-center w-5 h-5 mr-2 bg-foreground/5 rounded">
+              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+            </span>
+            <span className="group-hover:translate-x-0.5 transition-transform duration-300 -skew-x-1">oltean.alexandru11@gmail.com</span>
           </a>
         </div>
         <div className="flex items-center space-x-4">
           <Link
             href="/contact"
-            className="text-sm font-semibold hover:text-primary transition-colors duration-200 flex items-center"
+            className="text-sm font-marker hover:text-primary/80 transition-colors duration-200 flex items-center relative group"
           >
             Contact
           </Link>
-          <div className="flex space-x-4 border-l border-neutral-700/50 pl-4">
+          <div className="flex space-x-4 border-l border-foreground/10 pl-4 relative">
+            <div className="absolute inset-y-0 -left-px w-px bg-gradient-to-b from-transparent via-foreground/20 to-transparent"></div>
             <a 
               href="https://facebook.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-0.5"
+              className="hover:text-primary/80 transition-colors duration-200 relative"
             >
               <span className="sr-only">Facebook</span>
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -50,7 +63,7 @@ export function TopHeader() {
               href="https://instagram.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-0.5"
+              className="hover:text-primary/80 transition-colors duration-200 relative"
             >
               <span className="sr-only">Instagram</span>
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -61,7 +74,7 @@ export function TopHeader() {
               href="https://twitter.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-0.5"
+              className="hover:text-primary/80 transition-colors duration-200 relative"
             >
               <span className="sr-only">Twitter</span>
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -69,9 +82,14 @@ export function TopHeader() {
               </svg>
             </a>
           </div>
-          <div className="flex items-center space-x-3 border-l border-neutral-700/50 pl-4">
-            <LanguageSwitcher />
-            <ThemeToggle />
+          <div className="flex items-center space-x-3 border-l border-foreground/10 pl-4 relative">
+            <div className="absolute inset-y-0 -left-px w-px bg-gradient-to-b from-transparent via-foreground/20 to-transparent"></div>
+            <div>
+              <LanguageSwitcher />
+            </div>
+            <div>
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </div>
