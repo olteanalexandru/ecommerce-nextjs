@@ -7,7 +7,8 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],
-        display: ['var(--font-geist-sans)', 'system-ui', 'sans-serif']
+        display: ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],
+        marker: ['var(--font-permanent-marker)', 'cursive']
       },
       fontSize: {
         'base': '1.125rem',
@@ -62,6 +63,14 @@ const config: Config = {
           from: { opacity: '0' },
           to: { opacity: '1' }
         },
+        glitchSlide: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' }
+        },
+        glitchSlideReverse: {
+          '0%': { transform: 'translateX(100%)' },
+          '100%': { transform: 'translateX(-100%)' }
+        },
         marquee: {
           '0%': { transform: 'translateX(0%)' },
           '100%': { transform: 'translateX(-100%)' }
@@ -75,7 +84,12 @@ const config: Config = {
       animation: {
         fadeIn: 'fadeIn .3s ease-in-out',
         carousel: 'marquee 60s linear infinite',
-        blink: 'blink 1.4s both infinite'
+        blink: 'blink 1.4s both infinite',
+        'glitch-slide': 'glitchSlide 3s linear infinite',
+        'glitch-slide-reverse': 'glitchSlideReverse 2s linear infinite'
+      },
+      backgroundImage: {
+        'noise': "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noiseFilter)'/%3E%3C/svg%3E\")"
       }
     }
   },

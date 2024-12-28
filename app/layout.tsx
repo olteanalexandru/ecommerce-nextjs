@@ -7,9 +7,17 @@ import { GeistSans } from 'geist/font/sans';
 import { getServerLocale, getServerMessages } from 'lib/i18n-server';
 import { getCart, getMegaMenu, getMenu } from 'lib/shopify';
 import { ensureStartsWith } from 'lib/utils';
+import { Permanent_Marker } from 'next/font/google';
 import { cookies } from 'next/headers';
 import { ReactNode } from 'react';
 import './globals.css';
+
+const permanentMarker = Permanent_Marker({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-permanent-marker'
+});
 
 const { TWITTER_CREATOR, TWITTER_SITE, SITE_NAME } = process.env;
 const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
@@ -50,7 +58,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   console.log('Customer Menu Data in Layout:', customerMenuData);
 
   return (
-    <html lang={locale} className={GeistSans.variable}>
+    <html lang={locale} className={`${GeistSans.variable} ${permanentMarker.variable}`}>
       <body className="bg-background text-foreground antialiased min-h-screen flex flex-col">
         <ThemeProvider>
           <Providers locale={locale} messages={messages}>

@@ -64,6 +64,10 @@
     "profile": "Profile",
     "settings": "Settings"
   },
+  "banner": {
+    "title": "FRESH KICKS IN THE HOOD",
+    "message": "Ready to shred? We're bringing the dopest gear to your streets! Come through and level up your game"
+  },
   "Cookie": {
     "accept": "Accept All",
     "decline": "Decline",
