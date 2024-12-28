@@ -468,8 +468,6 @@ export async function getMegaMenu(handle: string): Promise<Menu[]> {
     }
   });
 
-  console.log('Mega Menu Response:', res.body?.data);
-
   const menuItems = res.body?.data?.menu?.items.map(item => ({
     title: item.title,
     path: item.url.replace(domain, '').replace('/collections', '/search').replace('/pages', ''),
@@ -480,8 +478,11 @@ export async function getMegaMenu(handle: string): Promise<Menu[]> {
     collections: {
       edges: res.body?.data?.collections?.edges || []
     },
-    products: {
-      edges: res.body?.data?.products?.edges || []
+    featuredProducts: {
+      edges: res.body?.data?.featuredProducts?.edges || []
+    },
+    newProducts: {
+      edges: res.body?.data?.newProducts?.edges || []
     }
   })) || [];
 

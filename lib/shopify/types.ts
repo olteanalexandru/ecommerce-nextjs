@@ -244,8 +244,45 @@ export type ShopifyMegaMenuOperation = {
         }[];
       }[];
     };
-    collections: Connection<ShopifyCollection>;
-    products: Connection<ShopifyProduct>;
+    collections: Connection<{
+      id: string;
+      handle: string;
+      title: string;
+      description: string;
+      products: Connection<{
+        handle: string;
+        title: string;
+        featuredImage: {
+          url: string;
+          altText: string;
+        };
+        priceRange: {
+          minVariantPrice: Money;
+        };
+      }>;
+    }>;
+    featuredProducts: Connection<{
+      handle: string;
+      title: string;
+      featuredImage: {
+        url: string;
+        altText: string;
+      };
+      priceRange: {
+        minVariantPrice: Money;
+      };
+    }>;
+    newProducts: Connection<{
+      handle: string;
+      title: string;
+      featuredImage: {
+        url: string;
+        altText: string;
+      };
+      priceRange: {
+        minVariantPrice: Money;
+      };
+    }>;
   };
   variables: {
     handle: string;
@@ -302,13 +339,44 @@ export interface Menu {
   collections?: {
     edges: Array<{
       node: {
+        id: string;
         handle: string;
         title: string;
         description: string;
+        products: {
+          edges: Array<{
+            node: {
+              handle: string;
+              title: string;
+              featuredImage: {
+                url: string;
+                altText: string;
+              };
+              priceRange: {
+                minVariantPrice: Money;
+              };
+            };
+          }>;
+        };
       };
     }>;
   };
-  products?: {
+  featuredProducts?: {
+    edges: Array<{
+      node: {
+        handle: string;
+        title: string;
+        featuredImage: {
+          url: string;
+          altText: string;
+        };
+        priceRange: {
+          minVariantPrice: Money;
+        };
+      };
+    }>;
+  };
+  newProducts?: {
     edges: Array<{
       node: {
         handle: string;

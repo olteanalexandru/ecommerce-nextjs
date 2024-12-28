@@ -15,7 +15,7 @@ type CartContextType = {
   addCartItem: (variant: ProductVariant, product: Product) => void;
 };
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
+export const CartContext = createContext<CartContextType | undefined>(undefined);
 
 function calculateItemCost(quantity: number, price: string): string {
   return (Number(price) * quantity).toString();
