@@ -1,4 +1,3 @@
-import { ClientCartProvider } from 'components/cart/client-cart-provider';
 import { CookieConsentBanner } from 'components/cookie-consent';
 import { Navbar } from 'components/layout/navbar';
 import { Providers } from 'components/providers';
@@ -61,14 +60,12 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
     <html lang={locale} className={`${GeistSans.variable} ${permanentMarker.variable}`}>
       <body className="bg-background text-foreground antialiased min-h-screen flex flex-col">
         <ThemeProvider>
-          <Providers locale={locale} messages={messages}>
-            <ClientCartProvider cart={Promise.resolve(cart)}>
-              <Navbar initialMenu={menuData} customerMenu={customerMenuData} />
-              <main className="flex-grow">
-                {children}
-              </main>
-              <CookieConsentBanner />
-            </ClientCartProvider>
+          <Providers locale={locale} messages={messages} cart={Promise.resolve(cart)}>
+            <Navbar initialMenu={menuData} customerMenu={customerMenuData} />
+            <main className="flex-grow">
+              {children}
+            </main>
+            <CookieConsentBanner />
           </Providers>
         </ThemeProvider>
       </body>

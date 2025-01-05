@@ -2,7 +2,7 @@
 
 import { Cart } from 'lib/shopify/types';
 import { useEffect, useState } from 'react';
-import { CartProvider as BaseCartProvider } from './cart-context';
+import { CartProvider } from './cart-context';
 
 export function ClientCartProvider({
   children,
@@ -11,26 +11,13 @@ export function ClientCartProvider({
   children: React.ReactNode;
   cart: Promise<Cart | undefined>;
 }) {
-  const [resolvedCart, setResolvedCart] = useState<Cart | undefined>(undefined);
+  const [cartData, setCartData] = useState<Cart | undefined>(undefined);
 
   useEffect(() => {
-    cart.then(result => {
-      setResolvedCart(result);
+    cart.then((data) => {
+      setCartData(data);
     });
   }, [cart]);
 
-  // Show children without cart functionality while loading
-  if (!resolvedCart) {
-    return (
-      <div className="h-full">
-        {children}
-      </div>
-    );
-  }
-
-  return (
-    <BaseCartProvider initialCart={resolvedCart}>
-      {children}
-    </BaseCartProvider>
-  );
+  return <CartProvider cart={cartData}>{children}</CartProvider>;
 }
